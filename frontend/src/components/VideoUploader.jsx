@@ -73,8 +73,8 @@ const VideoUploader = ({ onVideoUpload }) => {
 
 
     return (
-        <div className=''>
-            <form onSubmit={handleSubmit}>
+        <div className='w-full'>
+            <form onSubmit={handleSubmit} className='w-full'>
                 <input
                     type="file"
                     accept='video/mp4, video/mov'
@@ -83,7 +83,7 @@ const VideoUploader = ({ onVideoUpload }) => {
                     onChange={handleFileChange}
                 />
                 <div
-                    className='flex flex-col justify-center items-center h-[300px] w-[500px] p-2 cursor-pointer border-2 border-dashed border-[#a87c7cbb] rounded-lg'
+                    className='flex flex-col justify-center items-center h-[300px] md:h-[400px] w-full md:w-[800px] p-2 cursor-pointer border-2 border-dashed border-[#a87c7cbb] rounded-lg'
                     onClick={() => document.querySelector('.input-field').click()}
                 >
                     {video ?

@@ -11,7 +11,7 @@ const UploadVideo = () => {
         <div className='w-full h-full overflow-auto p-10'>
                 <h1>Upload Your Video</h1>
                 <div className='w-full h-[calc(100%-3rem)] flex justify-center items-center'>
-                    <div className='w-fit mx-auto bg-white p-5 rounded-lg shadow-lg'>
+                    <div className='w-full md:w-fit mx-auto bg-white p-5 rounded-lg shadow-lg'>
                         <VideoUploader />
                         <div className='mt-5'>
                             <Link 

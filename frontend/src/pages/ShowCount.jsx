@@ -17,22 +17,22 @@ const ShowCount = () => {
     });
 
     return (
-        <div className='w-full h-full overflow-auto p-14 flex flex-wrap justify-center items-center gap-10'>
+        <div className='w-full h-full overflow-auto p-6 md:p-10 flex flex-wrap justify-center items-center gap-10'>
             {showPopup && <ReportModal onClose={() => setShowPopup(false)} />}
-            <div className='w-fit'>
-                <div className='w-full bg-white p-5 shadow-md mb-10 rounded-md'>
+            <div className='w-full md:w-fit'>
+                <div className='w-fit mx-auto bg-white p-5 shadow-md mb-10 rounded-md'>
                     <div className='w-full flex flex-wrap justify-center items-center gap-10 mb-10'>
-                        <div className='w-56 p-7 bg-[#866078] rounded-md shadow text-white text-5xl text-center'>
-                            <h3 className='mb-3'>Time (In Seconds)</h3>
-                            100
+                        <div className='w-36 md:w-56 p-7 bg-[#866078] rounded-md shadow text-white text-center'>
+                            <h3 className='mb-3 text-base md:text-lg'>Time (In Seconds)</h3>
+                            <div className='text-4xl md:text-5xl'>100</div>
                         </div>
-                        <div className='w-56 p-7 bg-[#866078] rounded-md shadow text-white text-5xl text-center'>
-                            <h3 className='mb-3'>Finished Count</h3>
-                            100
+                        <div className='w-36 md:w-56 p-7 bg-[#866078] rounded-md shadow text-white text-center'>
+                            <h3 className='mb-3 text-base md:text-lg'>Finished Count</h3>
+                            <div className='text-4xl md:text-5xl'>100</div>
                         </div>
                     </div>
                         
-                    <div className='w-full flex flex-wrap justify-evenly items-center gap-5'>
+                    <div className='w-full flex flex-wrap justify-center md:justify-evenly items-center gap-5'>
                         {isPaused ? (
                             <button onClick={handlePause} className='border-2 border-[#b0578d] rounded-full shadow-md py-2 px-5 text-xs text-[#b0578d] font-medium flex justify-between items-center gap-2 hover:bg-[#b3809e] hover:text-white'>
                                 <AiOutlinePlayCircle className='text-xl' />
@@ -60,8 +60,8 @@ const ShowCount = () => {
                     </div>              
                 </div>
 
-                <div className='bg-slate-300 w-[50vw] h-[60vh]'>
-                    
+                <div className='bg-slate-300 w-full md:w-[50vw] h-fit max-h-[60vh]'>
+                    <video src="" controls className='w-full'></video>
                 </div>
             </div> 
         </div>
