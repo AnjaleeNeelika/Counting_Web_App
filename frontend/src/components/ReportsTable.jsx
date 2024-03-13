@@ -100,9 +100,9 @@ const people = [
     // More people...
   ];
 
-const Table = () => {
+const ReportsTable = () => {
     return (
-        <div className="flex flex-col">
+        <div className="w-full flex flex-col">
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div className="shadow border-b border-[#c2a2a2d5] sm:rounded-lg overflow-hidden">
@@ -167,4 +167,4 @@ const Table = () => {
     );
 };
 
-export default Table;
+export default ReportsTable;

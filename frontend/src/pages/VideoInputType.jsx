@@ -26,14 +26,14 @@ const VideoInputType = () => {
     }
 
     return (
-        <div className='w-full h-full overflow-auto flex justify-center items-center'>
-            <form method='' className='bg-[#fff] min-w-[300px] w-fit h-fit shadow-lg p-10 rounded-md flex justify-center items-center text-center'>
+        <div className='w-full h-full overflow-auto p-5 md:p-10 flex flex-wrap justify-center items-center'>
+            <form method='' className='bg-[#fff] w-full md:w-fit h-fit shadow-lg p-5 md:p-10 rounded-md flex justify-center items-center text-center'>
                 <div>
                     <div className='w-full text-center text-2xl font-semibold mx-auto'>
                         Select Video Input Type
                     </div>
                     <div className='w-full px-5 mx-auto mt-8 mb-10 flex justify-between items-center gap-10'>
-                        <div className="w-[200px] text-center flex items-center justify-center border-[2px] border-[#a87499] bg-[#8f6482c0] py-5 px-5 rounded-md shadow-md hover:bg-[#c089b0c0]">
+                        <div className="w-[170px] md:w-[200px] text-center flex items-center justify-center border-[2px] border-[#a87499] bg-[#8f6482c0] p-2 md:p-5 rounded-md shadow-md hover:bg-[#c089b0c0]">
                             <input
                                 id="live"
                                 type="radio"
@@ -49,7 +49,7 @@ const VideoInputType = () => {
                                 Live Video
                             </label>
                         </div>
-                        <div className="w-[200px] text-center flex items-center justify-center border-[2px] border-[#a87499] bg-[#8f6482c0] py-5 px-5 rounded-md shadow-md hover:bg-[#c089b0c0]">
+                        <div className="w-[170px] md:w-[200px] text-center flex items-center justify-center border-[2px] border-[#a87499] bg-[#8f6482c0] p-2 md:p-5 rounded-md shadow-md hover:bg-[#c089b0c0]">
                             <input
                                 id="upload"
                                 type="radio"

@@ -2,8 +2,8 @@ import React from 'react';
 
 const ReportModal = ({ onClose }) => {
   return (
-    <div className='fixed top-20 left-0 h-full w-full bg-black bg-opacity-50 flex justify-center items-center'>
-        <div className='w-[500px] bg-white p-5 rounded-lg shadow'>
+    <div className='fixed top-20 left-0 h-full w-full bg-black bg-opacity-50 flex justify-center items-center p-5 md:p-0 z-10 backdrop-blur-md'>
+        <div className='w-full md:w-[500px] bg-white p-5 rounded-lg shadow'>
             <h2 className='w-fit mx-auto'>Report</h2>
             <div className='w-full my-5'>
                 <div className='flex justify-between items-center'>

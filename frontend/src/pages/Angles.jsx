@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 
 const Angles = () => {
     return (
-        <div className='w-full h-full overflow-auto flex justify-center items-center p-10 gap-10'>
-            <div className='bg-slate-300 w-[50vw] h-[60vh]'>
-                    
+        <div className='w-full h-full overflow-auto p-6 md:p-10 flex flex-wrap justify-center items-center gap-10'>
+            <div className='bg-slate-300 w-full md:w-[50vw] h-fit max-h-[60vh]'>
+                <video src="" controls className='w-full'></video>
             </div>
-            <div className='bg-white p-10 rounded-md shadow-md'>
+            <div className='bg-white p-5 md:p-10 rounded-md shadow-md'>
                 <div className='mb-3'>
                     <h2 className='mb-4'>Angles</h2>
                     <h3>Enter a threshold value you want</h3>
@@ -27,27 +27,13 @@ const Angles = () => {
                     <tbody>
                         <tr>
                             <td className='text-left'>
-                                <h3 className='text-[#b0578d] text-base font-medium'>Action 1</h3>
+                                <h3 className='text-[#b0578d] text-sm md:text-base font-medium'>Action 1</h3>
                             </td>
                             <td>
-                                <input type="text" name="" id="" disabled className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
+                                <input type="text" name="" id="" disabled className='border w-20 md:w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
                             </td>
                             <td>
-                                <input type="number" max={100} min={1} name="" id="" className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
-                            </td>
-                            <td>
-                                <input type="text" name="" id="" disabled className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className='text-left'>
-                                <h3 className='text-[#b0578d] text-base font-medium'>Action 2</h3>
-                            </td>
-                            <td>
-                                <input type="text" name="" id="" disabled className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
-                            </td>
-                            <td>
-                                <input type="number" max={100} min={1} name="" id="" className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
+                                <input type="number" max={100} min={1} name="" id="" className='border w-20 md:w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
                             </td>
                             <td>
                                 <input type="text" name="" id="" disabled className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
@@ -55,13 +41,27 @@ const Angles = () => {
                         </tr>
                         <tr>
                             <td className='text-left'>
-                                <h3 className='text-[#b0578d] text-base font-medium'>Action 3</h3>
+                                <h3 className='text-[#b0578d] text-sm md:text-base font-medium'>Action 2</h3>
+                            </td>
+                            <td>
+                                <input type="text" name="" id="" disabled className='border w-20 md:w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
+                            </td>
+                            <td>
+                                <input type="number" max={100} min={1} name="" id="" className='border w-20 md:w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
                             </td>
                             <td>
                                 <input type="text" name="" id="" disabled className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
                             </td>
+                        </tr>
+                        <tr>
+                            <td className='text-left'>
+                                <h3 className='text-[#b0578d] text-sm md:text-base font-medium'>Action 3</h3>
+                            </td>
                             <td>
-                                <input type="number" max={100} min={1} name="" id="" className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
+                                <input type="text" name="" id="" disabled className='border w-20 md:w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
+                            </td>
+                            <td>
+                                <input type="number" max={100} min={1} name="" id="" className='border w-20 md:w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
                             </td>
                             <td>
                                 <input type="text" name="" id="" disabled className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
