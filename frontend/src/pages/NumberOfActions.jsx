@@ -5,10 +5,13 @@ import Button1 from '../components/Button1';
 const NumberOfActions = () => {
     const location = useLocation();
     const currentLocation = location.pathname;
+    const searchParams = new URLSearchParams(location.search);
+    const videoPath = searchParams.get('videoPath');
+    console.log(videoPath);
 
     return (
-        <div className='w-full h-full overflow-auto p-5 md:p-10 flex flex-wrap justify-center items-center'>
-            <div>
+        <div className='w-full h-full overflow-auto p-6 md:p-10 flex flex-wrap justify-center items-center gap-10'>
+            <div className=''>
                 <form className='bg-slate-50 text-center w-fit h-fit px-3 md:px-6 py-5 mx-auto rounded-md shadow-md'>
                     <h2 className='mx-auto text-center w-fit text-[#8a5374]'>Count the Number of Steps Per One Action</h2>
                     <div className='w-fit mx-auto flex flex-wrap justify-center items-center mt-3 mb-8'>
@@ -19,12 +22,10 @@ const NumberOfActions = () => {
                         <Button1>Enter</Button1>
                     </Link>                    
                 </form> 
-                <div className='bg-slate-300 w-full md:w-[50vw] max-h-[60vh] h-fit mx-auto mt-5'>
-                    <video src="" controls className='w-full'></video>
+                <div className='bg-slate-300 lg:w-[900px] w-full max-h-[500px] h-fit mx-auto mt-5 shadow-md'>
+                    <video src={videoPath} controls autoPlay loop className='w-full'></video>
                 </div>
-                  
-            </div>
-                  
+            </div> 
         </div>
     )
 }

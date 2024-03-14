@@ -23,6 +23,7 @@ const App = () => {
                     <Route path='reports' element={<Reports />} />
                     <Route path='/video-input-type' element={<VideoInputType />} />
                     <Route path='/video-input-type/live-Video' element={<LiveVideo />} />
+                    <Route path='/video-input-type/live-Video/downloaded-videos/no-of-actions' element={<NumberOfActions />} />
                     <Route path='/video-input-type/upload-video' element={<UploadVideo />} />
                     <Route path='/video-input-type/no-of-actions' element={<NumberOfActions />} />
                     <Route path='/video-input-type/no-of-actions/input-points' element={<InputPoints />} />

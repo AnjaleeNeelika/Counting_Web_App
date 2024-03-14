@@ -6,7 +6,7 @@ const Angles = () => {
     return (
         <div className='w-full h-full overflow-auto p-6 md:p-10 flex flex-wrap justify-center items-center gap-10'>
             <div className='bg-slate-300 w-full md:w-[50vw] h-fit max-h-[60vh]'>
-                <video src="" controls className='w-full'></video>
+                <video src='/assets/videos/downloaded-video-4.mp4' controls className='w-full'></video>
             </div>
             <div className='bg-white p-5 md:p-10 rounded-md shadow-md'>
                 <div className='mb-3'>
