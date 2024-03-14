@@ -60,8 +60,8 @@ const ShowCount = () => {
                     </div>              
                 </div>
 
-                <div className='bg-slate-300 w-full md:w-[50vw] h-fit max-h-[60vh]'>
-                    <video src="" controls className='w-full'></video>
+                <div className='bg-slate-300 w-full md:w-[50vw] h-fit max-h-[60vh] mx-auto'>
+                    <video src='/assets/videos/downloaded-video-4.mp4' controls className='w-full'></video>
                 </div>
             </div> 
         </div>

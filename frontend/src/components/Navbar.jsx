@@ -90,7 +90,7 @@ const Navbar = () => {
         <div>
             {/* <nav className={`flex justify-between items-center p-5 shadow-[0_10px_20px_rgb(0,0,0,0.10)] bg-[#402b3a] ${isScrolled ? 'shadow-[0_20px_30px_rgb(0,0,0,0.28)]' : ''}`}> */}
             <nav className='w-full h-[5rem] flex justify-between items-center p-5 bg-[#402b3a] shadow-[0_20px_30px_rgb(0,0,0,0.28)] z-50'>
-                <a href="" className='text-white text-3xl font-semibold'>Company</a>
+                <a href="" className='text-white text-3xl font-semibold'>Counting App</a>
 
                 <div>
                     <ul className={`md:flex md:justify-between md:items-center gap-10 md:pt-0 pt-5 absolute md:static md:z-auto left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 transition-200 ease-in bg-white md:bg-transparent md:text-white ${open ? 'top-20 opacity-100' : 'top-[-490px] md:opacity-100 opacity-0'}`}>

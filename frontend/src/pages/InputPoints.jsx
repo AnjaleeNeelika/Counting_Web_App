@@ -7,9 +7,9 @@ const InputPoints = () => {
     return (
         <div className='w-full h-full overflow-auto p-6 md:p-10'>
             <h1 className='w-full mx-auto text-center'>Enter the Point Numbers</h1>
-            <div className='flex flex-wrap justify-center items-center gap-10 md:p-5'>
+            <div className='flex flex-wrap w-full h-fit justify-center items-center gap-10 md:p-5'>
                 <div className='bg-slate-300 w-full md:w-[50vw] h-fit max-h-[60vh]'>
-                    <video src="" controls className='w-full'></video>
+                    <video src='/assets/videos/downloaded-video-4.mp4' controls className='w-full'></video>
                 </div>
                 <div className='flex flex-wrap justify-between items-center bg-white p-5 rounded-md shadow-md w-full md:w-fit'>
                     <img src={PoseLandmarks} className='w-full md:w-[20vw]' />
