@@ -21,7 +21,7 @@ const LiveVideo = () => {
 
             <div>
                 <div className='bg-slate-300 w-full md:w-[50vw] h-fit max-h-[60vh] mx-auto'>
-                    <video src="" controls className='w-full'></video>
+                    <video src='/assets/videos/downloaded-video-5.mp4' controls autoPlay className='w-full'></video>
                 </div>
                 <form className='mt-10 bg-slate-50 w-fit h-fit px-5 py-5 mx-auto rounded-md shadow-md'>
                     <h2 className='mx-auto w-fit text-[#8a5374]'>Download A Snippet of Video</h2>
