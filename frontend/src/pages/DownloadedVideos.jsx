@@ -33,6 +33,13 @@ const videos = [
         duration: '20 sec',
         videoPath: '/assets/videos/downloaded-video-4.mp4'
     },
+    {
+        id: 7,
+        name: 'downloaded-video-4.mp4',
+        date: '2024/03/12',
+        duration: '20 sec',
+        videoPath: '/assets/videos/downloaded-video-5.mp4'
+    },
     // {
     //     id: 5,
     //     name: 'downloaded-video-2.mp4',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlinePauseCircle, AiOutlinePlayCircle } from 'react-icons/ai';
 import { BiListCheck, BiStopCircle,  } from 'react-icons/bi';
 import ReportModal from '../components/ReportModal';
@@ -7,6 +7,7 @@ const ShowCount = () => {
     const [isPaused, setIsPaused] = useState(false);
     const [isStopped, setIsStopped] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
+    const [seconds, setSeconds] = useState(0);
 
     const handlePause = (() => {
         setIsPaused(!isPaused);
@@ -16,6 +17,14 @@ const ShowCount = () => {
         setIsStopped(true);
     });
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setSeconds(prevSeconds => prevSeconds + 1);
+        }, 1000);
+
+        return () => clearInterval(interval);
+    })
+
     return (
         <div className='w-full h-full overflow-auto p-6 md:p-10 flex flex-wrap justify-center items-center gap-10'>
             {showPopup && <ReportModal onClose={() => setShowPopup(false)} />}
@@ -24,7 +33,7 @@ const ShowCount = () => {
                     <div className='w-full flex flex-wrap justify-center items-center gap-10 mb-10'>
                         <div className='w-36 md:w-56 p-7 bg-[#866078] rounded-md shadow text-white text-center'>
                             <h3 className='mb-3 text-base md:text-lg'>Time (In Seconds)</h3>
-                            <div className='text-4xl md:text-5xl'>100</div>
+                            <div className='text-4xl md:text-5xl'>{seconds}</div>
                         </div>
                         <div className='w-36 md:w-56 p-7 bg-[#866078] rounded-md shadow text-white text-center'>
                             <h3 className='mb-3 text-base md:text-lg'>Finished Count</h3>
@@ -61,7 +70,7 @@ const ShowCount = () => {
                 </div>
 
                 <div className='bg-slate-300 w-full md:w-[50vw] h-fit max-h-[60vh] mx-auto'>
-                    <video src='/assets/videos/downloaded-video-4.mp4' controls className='w-full'></video>
+                    <video src='/assets/videos/downloaded-video-5.mp4' controls autoPlay className='w-full'></video>
                 </div>
             </div> 
         </div>
