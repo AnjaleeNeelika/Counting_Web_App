@@ -6,9 +6,8 @@ import { BrowserRouter } from 'react-router-dom'
 import { SelectContextProvider } from '@material-tailwind/react/components/Select/SelectContext.js'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <React.StrictMode>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>                  
-    </React.StrictMode>,
+
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
 )
