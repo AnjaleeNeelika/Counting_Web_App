@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const people = [
     {
@@ -101,6 +101,8 @@ const people = [
   ];
 
 const ReportsTable = () => {
+    const [showReport, setShowReport] = useEffect();
+    
     return (
         <div className="w-full flex flex-col">
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -151,7 +153,7 @@ const ReportsTable = () => {
                                             Dress making using 3 steps
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <button className='bg-[#8b6b7c] w-[6rem] py-2 rounded-full text-white text-sm hover:bg-[#a08493] hover:-translate-y-1 tranform duration-200'>View</button>
+                                            <button onClick={() => setShowReport(true)} className='bg-[#8b6b7c] w-[6rem] py-2 rounded-full text-white text-sm hover:bg-[#a08493] hover:-translate-y-1 tranform duration-200'>View</button>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <button className='bg-[#85585f] w-[6rem] py-2 rounded-full text-white text-sm hover:bg-[#9b7076] hover:-translate-y-1 tranform duration-200'>Download</button>
