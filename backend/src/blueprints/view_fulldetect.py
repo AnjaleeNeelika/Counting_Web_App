@@ -43,14 +43,15 @@ def get_video_details(video_id):
                 cap = cv2.VideoCapture(video_file_path)
 
                 if not cap.isOpened():
-                    return jsonify({'error': 'Failed to open video capture'}), 500
+                    print({'error': 'Failed to open video capture'})
+                    exit(1)
 
                 pd = PoseDetector(trackCon=0.70, detectionCon=0.70)
 
                 frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
                 frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
                 fps = int(cap.get(cv2.CAP_PROP_FPS))
-                codec = int(cap.get(cv2.CAP_PROP_FOURCC)) #encoding video frame
+                codec = int(cap.get(cv2.CAP_PROP_FOURCC))  # encoding video frame
                 out = cv2.VideoWriter(output_video_file_path, codec, fps, (frame_width, frame_height))
 
                 total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -66,11 +67,13 @@ def get_video_details(video_id):
                     pd.findPose(frame, draw=0)
                     lmList, _ = pd.findPosition(frame, draw=0, bboxWithHands=0)
 
-                    # Draw landmarks if detected
                     if lmList:
-                        for point in lmList:
+                        landmarks = [lmList[i] for i in [11, 12, 13, 14, 15, 16, 23, 24, 25, 26]]  
+                          
+                        for idx, point in enumerate(landmarks):
                             x, y = point[:2]
-                            cv2.circle(frame, (int(x), int(y)), 5, (0, 255, 0), cv2.FILLED)
+                            cv2.putText(frame, str(idx), (int(x), int(y)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2, cv2.LINE_AA)
+
 
                     out.write(frame)
 
@@ -79,7 +82,6 @@ def get_video_details(video_id):
                 cap.release()
                 out.release()
 
-
                 print("save as sample video")
                 return jsonify({'filePath': output_video_file_path})
         else:
@@ -87,4 +89,4 @@ def get_video_details(video_id):
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
+
