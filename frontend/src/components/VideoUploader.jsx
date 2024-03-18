@@ -5,7 +5,7 @@ import axios from 'axios';
 import { MdCloudUpload, MdDelete } from 'react-icons/md';
 // import { FaFileVideo } from 'react-icons/fa';
 
-const BASE_URL = 'http://localhost:8080';
+const BASE_URL = 'http://localhost:5000';
 
 
 const apiService = {
@@ -15,13 +15,13 @@ const apiService = {
         formData.append('description', description);
 
         try {
-            const response = await axios.post(`${BASE_URL}/videos/upload`, formData, {
+            const response = await axios.post(`${BASE_URL}/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
             console.log(response.data)
-            const id = response.data;
+            const id = response.data['video_id'];
             console.log(id);
             return id;
         } catch (error) {
