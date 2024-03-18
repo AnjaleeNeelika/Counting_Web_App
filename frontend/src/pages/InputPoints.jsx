@@ -1,15 +1,51 @@
-import React from 'react';
+import { React, useEffect, useState } from 'react';
 import PoseLandmarks from '../assets/images/pose_landmarks_index.png';
 import Button1 from '../components/Button1';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+const BASE_URL = 'http://localhost:5000';
 
 const InputPoints = () => {
+    const [fileName, setFileName] = useState(null);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const currentURL = window.location.href;
+        const parts = currentURL.split('/');
+        const id = parts[parts.length - 1];
+
+        axios.get(`${BASE_URL}/videos/view-fulldetect/${id}`)
+            .then(response => {
+                const filePath = response.data.filePath;
+                console.log("filepathhhh" + filePath)
+                const parts = filePath.split('/'); // Split by backslash
+                const fileName = parts.pop(); // Get the last part (the file name)
+
+                console.log(fileName)
+                console.log(filePath)
+
+                setFileName(fileName); // Update fileName state
+            })
+            .catch(error => {
+                setError(error.message);
+                console.error('Error loading video:', error);
+            });
+    }, []);
+
+
+
+
     return (
         <div className='w-full h-full overflow-auto p-6 md:p-10'>
             <h1 className='w-full mx-auto text-center'>Enter the Point Numbers</h1>
             <div className='flex flex-wrap w-full h-fit justify-center items-center gap-10 md:p-5'>
                 <div className='bg-slate-300 w-full md:w-[50vw] h-fit max-h-[60vh]'>
-                    <video src='/assets/videos/downloaded-video-5.mp4' controls autoPlay className='w-full'></video>
+                    {fileName && (
+                        <video className="w-full" autoPlay loop controls muted>
+                            <source src={`/videos/fulldetect_videos/${fileName}`} type="video/mp4" />
+                        </video>
+                    )}
                 </div>
                 <div className='flex flex-wrap justify-between items-center bg-white p-5 rounded-md shadow-md w-full md:w-fit'>
                     <img src={PoseLandmarks} className='w-full md:w-[20vw]' />
@@ -35,11 +71,11 @@ const InputPoints = () => {
                             26 - right knee<br />
                             27 - left ankle<br />
                             28 - right ankle<br />
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
             <div className='flex justify-center items-center p-10'>
                 <div>
                     <div className='flex gap-5 w-fit mx-auto bg-[#a57d97ce] text-white mb-5 py-3 px-5 rounded shadow'>
@@ -62,7 +98,7 @@ const InputPoints = () => {
                                     <input type='text' className='border-2 border-[#e7e7e7] hover:border-[#d3b0c7] focus:border-[#d3b0c7] outline-none rounded p-2' />
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                         <div className='py-3'>
                             <h4>Action 2</h4>
                             <div className='w-full text-sm mt-2'>
@@ -79,7 +115,7 @@ const InputPoints = () => {
                                     <input type='text' className='border-2 border-[#e7e7e7] hover:border-[#d3b0c7] focus:border-[#d3b0c7] outline-none rounded p-2' />
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                         <div className='py-3'>
                             <h4>Action 3</h4>
                             <div className='w-full text-sm mt-2'>
@@ -96,16 +132,16 @@ const InputPoints = () => {
                                     <input type='text' className='border-2 border-[#e7e7e7] hover:border-[#d3b0c7] focus:border-[#d3b0c7] outline-none rounded p-2' />
                                 </div>
                             </div>
-                        </div>            
+                        </div>
                     </div>
                     <div className='mt-5'>
                         <Link to={{ pathname: '/video-input-type/angles' }}>
-                            <Button1>Save</Button1> 
-                        </Link>                        
-                    </div>  
+                            <Button1>Save</Button1>
+                        </Link>
+                    </div>
                 </div>
             </div>
-            
+
         </div>
     )
 }

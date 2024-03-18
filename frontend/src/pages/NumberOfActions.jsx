@@ -53,7 +53,7 @@ const NumberOfActions = () => {
                         <span className='text-sm mr-0 md:mr-5 mb-2 md:mb-0'>Enter the number of steps</span>
                         <input type="text" name="" id="" className='text-sm border-2 border-[#ddd] hover:border-[#b89ead] focus:border-[#b89ead] outline-none px-4 py-2 rounded' />
                     </div>
-                    <Link to={{ pathname: '/video-input-type/no-of-actions/input-points' }}>
+                    <Link to={`/video-input-type/no-of-actions/input-points/${videoId}`}>
                         <Button1>Enter</Button1>
                     </Link>
                 </form>
