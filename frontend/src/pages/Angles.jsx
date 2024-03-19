@@ -1,12 +1,53 @@
-import React from 'react';
+import { React, useEffect, useState } from 'react';
 import Button1 from '../components/Button1';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+const BASE_URL = 'http://localhost:5000';
+
+
 
 const Angles = () => {
+    const [videoSrc, setVideoSrc] = useState(null);
+    const [error, setError] = useState(null);
+    const [fileName, setFileName] = useState(null);
+    const [videoId, setVideoId] = useState(null);
+    const [numberOfSteps, setNumberOfSteps] = useState('');
+
+    useEffect(() => {
+        const fetchVideoDetails = async () => {
+            try {
+                const currentURL = window.location.href;
+                const cparts = currentURL.split('/');
+                const id = cparts[cparts.length - 1];
+
+                const response = await axios.get(`${BASE_URL}/videos/get-angles/${id}`);
+                const filePath = response.data.filePath;
+                const parts = filePath.split('/');
+                const fileName = parts.pop();
+
+                setFileName(fileName);
+                console.log(fileName)
+                setVideoSrc(filePath);
+                setVideoId(id);
+            } catch (error) {
+                setError(error.message);
+                console.error('Error loading video:', error);
+            }
+        };
+
+        fetchVideoDetails();
+    }, []);
+
     return (
         <div className='w-full h-full overflow-auto p-6 md:p-10 flex flex-wrap justify-center items-center gap-10'>
             <div className='bg-slate-300 w-full md:w-[50vw] h-fit max-h-[60vh]'>
-                <video src='/assets/videos/downloaded-video-5.mp4' controls autoPlay className='w-full'></video>
+                {/* <video src='/assets/videos/downloaded-video-5.mp4' controls autoPlay className='w-full'></video> */}
+                {fileName && (
+                    <video className="w-full" autoPlay loop controls muted>
+                        <source src={`/videos/get_angles_videos/${fileName}`} type="video/mp4" />
+                    </video>
+                )}
             </div>
             <div className='bg-white p-5 md:p-10 rounded-md shadow-md'>
                 <div className='mb-3'>
@@ -67,7 +108,7 @@ const Angles = () => {
                                 <input type="text" name="" id="" disabled className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
                             </td>
                         </tr>
-                    </tbody>  
+                    </tbody>
                 </table>
 
                 <div className='mb-3 mt-10'>
@@ -116,15 +157,15 @@ const Angles = () => {
                                 <input type="number" max={180} min={1} name="" id="" className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
                             </td>
                         </tr>
-                    </tbody>  
+                    </tbody>
                 </table>
 
                 <div className='mt-8'>
                     <Link to={{ pathname: '/video-input-type/show-count' }}>
                         <Button1>Continue</Button1>
-                    </Link>                    
+                    </Link>
                 </div>
-                
+
             </div>
         </div>
     )

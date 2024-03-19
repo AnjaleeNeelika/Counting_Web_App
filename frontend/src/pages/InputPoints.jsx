@@ -9,6 +9,7 @@ const BASE_URL = 'http://localhost:5000';
 const InputPoints = () => {
     const [fileName, setFileName] = useState(null);
     const [error, setError] = useState(null);
+    const [videoId, setVideoId] = useState(null);
 
     useEffect(() => {
         const currentURL = window.location.href;
@@ -26,6 +27,7 @@ const InputPoints = () => {
                 console.log(filePath)
 
                 setFileName(fileName); // Update fileName state
+                setVideoId(id);
             })
             .catch(error => {
                 setError(error.message);
@@ -135,7 +137,7 @@ const InputPoints = () => {
                         </div>
                     </div>
                     <div className='mt-5'>
-                        <Link to={{ pathname: '/video-input-type/angles' }}>
+                        <Link to={`/video-input-type/angles/${videoId}`}>
                             <Button1>Save</Button1>
                         </Link>
                     </div>
