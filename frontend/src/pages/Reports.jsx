@@ -1,6 +1,6 @@
 import React from 'react';
-import Table from '../components/ReportsTable';
 import ReportsTable from '../components/ReportsTable';
+
 
 const Reports = () => {
     return (

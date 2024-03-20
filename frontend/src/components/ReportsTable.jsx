@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const people = [
     {
@@ -101,10 +101,10 @@ const people = [
   ];
 
 const ReportsTable = () => {
-    const [showReport, setShowReport] = useEffect();
-    
+    const [showReport, setShowReport] = useState();
+
     return (
-        <div className="w-full flex flex-col">
+        <div className='w-full flex flex-col'>
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div className="shadow border-b border-[#c2a2a2d5] sm:rounded-lg overflow-hidden">
@@ -166,7 +166,7 @@ const ReportsTable = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default ReportsTable;
+export default ReportsTable

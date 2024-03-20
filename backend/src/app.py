@@ -13,7 +13,7 @@ app = Flask(__name__)
 CORS(app)
 
 
-app.config['MONGO_URI'] = 'mongodb://localhost/mediapipe-project'
+app.config['MONGO_URI'] = 'mongodb+srv://root:root1234@test1.rno2onb.mongodb.net/test1?retryWrites=true&w=majority&appName=test1'
 mongo = PyMongo(app)
 
 app.register_blueprint(video_upload_bp)
