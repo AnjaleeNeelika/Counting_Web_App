@@ -11,6 +11,8 @@ import InputPoints from './pages/InputPoints';
 import Angles from './pages/Angles';
 import ShowCount from './pages/ShowCount';
 import DownloadedVideos from './pages/DownloadedVideos';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 const App = () => {
     return (
@@ -20,7 +22,9 @@ const App = () => {
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/home' element={<Home />} />
-                    <Route path='reports' element={<Reports />} />
+                    <Route path='/reports' element={<Reports />} />
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/signup' element={<Signup />} />
                     <Route path='/video-input-type' element={<VideoInputType />} />
                     <Route path='/video-input-type/live-Video' element={<LiveVideo />} />
                     <Route path='/video-input-type/live-Video/downloaded-videos/no-of-actions' element={<NumberOfActions />} />

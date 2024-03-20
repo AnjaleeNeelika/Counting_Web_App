@@ -1,28 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import EmptyError from '../components/EmptyError';
 
 const VideoInputType = () => {
-    const [selectedOptions, setSelectedOptions] = useState('');
+    const [selectedOption, setSelectedOption] = useState('');
     const [path, setPath] = useState('');
+    const [error, setError] = useState(false);
     const location = useLocation();
     const currentLocation = location.pathname;
 
     useEffect(() => {
-        if(selectedOptions === 'Live') {
+        if(selectedOption === 'Live') {
             setPath(`${currentLocation}/live-video`)
-        } else if(selectedOptions === 'Upload') {
+        } else if(selectedOption === 'Upload') {
             setPath(`${currentLocation}/upload-video`)
         }
-    }, [selectedOptions]);
+    }, [selectedOption]);
 
     const handleOptionChange = (e) => {
-        setSelectedOptions(e.target.value);
-        console.log("Selected Option:", selectedOptions);
+        setSelectedOption(e.target.value);
+        setError(false);
+        console.log("Selected Option:", selectedOption);
     }
 
     const handleSubmit = () => {
-        console.log("Selected Option:", selectedOptions);
-        console.log("Path: ", path)
+        if(selectedOption === '') {
+            setError(true);
+        } else {
+            setError(false);
+            console.log("Selected Option:", selectedOption);
+            console.log("Path: ", path)
+        }
     }
 
     return (
@@ -32,6 +40,11 @@ const VideoInputType = () => {
                     <div className='w-full text-center text-2xl font-semibold mx-auto'>
                         Select Video Input Type
                     </div>
+                    
+                    {error && 
+                        <EmptyError message='Please select an option to continue' />
+                    }
+
                     <div className='w-full px-5 mx-auto mt-8 mb-10 flex justify-between items-center gap-10'>
                         <div className="w-[170px] md:w-[200px] text-center flex items-center justify-center border-[2px] border-[#a87499] bg-[#8f6482c0] p-2 md:p-5 rounded-md shadow-md hover:bg-[#c089b0c0]">
                             <input

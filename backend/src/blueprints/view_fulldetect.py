@@ -72,7 +72,7 @@ def get_video_details(video_id):
                           
                         for idx, point in enumerate(landmarks):
                             x, y = point[:2]
-                            cv2.putText(frame, str(idx), (int(x), int(y)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2, cv2.LINE_AA)
+                            cv2.putText(frame, str(idx), (int(x), int(y)), cv2.FONT_HERSHEY_SIMPLEX, 5.0, (0, 255, 0), 2, cv2.LINE_AA)
 
 
                     out.write(frame)
