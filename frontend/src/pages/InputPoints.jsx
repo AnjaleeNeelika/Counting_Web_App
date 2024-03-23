@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from 'react';
 import PoseLandmarks from '../assets/images/pose_landmarks_index.png';
 import Button1 from '../components/Button1';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const BASE_URL = 'http://localhost:5000';
@@ -11,6 +11,9 @@ const InputPoints = () => {
     const [error, setError] = useState(null);
     const [videoId, setVideoId] = useState(null);
     const [no_of_actions, setNoOfActions] = useState(null);
+    const [formData, setFormData] = useState([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const currentURL = window.location.href;
@@ -28,7 +31,7 @@ const InputPoints = () => {
                 console.log(fileName)
                 console.log(filePath)
 
-                setFileName(fileName); // Update fileName state
+                setFileName(fileName);
                 setVideoId(id);
                 setNoOfActions(no_of_actions)
             })
@@ -37,6 +40,41 @@ const InputPoints = () => {
                 console.error('Error loading video:', error);
             });
     }, []);
+
+
+    const handleInputChange = (index, field, value) => {
+        setFormData(prevData => {
+            const newData = [...prevData]; // Create a copy of the previous data array
+            if (index >= newData.length) {
+                // If the index exceeds the current length, add empty objects up to the index
+                for (let i = newData.length; i <= index; i++) {
+                    newData.push({ midPoint: '', point1: '', point2: '' });
+                }
+            }
+            newData[index] = { ...newData[index], [field]: value }; // Update the specific field of the object at the given index
+            return newData; // Return the updated data array
+        });
+    };
+
+
+
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log("Form data:", formData);
+        try {
+            await axios.post(`${BASE_URL}/input_points`, {
+                _id: videoId,
+                input_points: formData
+            });
+            console.log("Request sent successfully!"); // Log success
+            navigate(`/video-input-type/angles/${videoId}`);
+        } catch (error) {
+            console.error('Error posting number of actions:', error);
+            // Handle error
+        }
+    };
 
 
 
@@ -93,15 +131,30 @@ const InputPoints = () => {
                                 <div className='w-full text-sm mt-2'>
                                     <div className='w-full flex justify-between items-center gap-2 md:gap-5 mb-3'>
                                         <label htmlFor="" className='bg-slate-100'>Mid Point</label>
-                                        <input type='text' className='border-2 border-[#e7e7e7] hover:border-[#d3b0c7] focus:border-[#d3b0c7] outline-none rounded p-2' />
+                                        {/* <input type='text' className='border-2 border-[#e7e7e7] hover:border-[#d3b0c7] focus:border-[#d3b0c7] outline-none rounded p-2' /> */}
+                                        <input
+                                            type='text'
+                                            className='border-2 border-[#e7e7e7] hover:border-[#d3b0c7] focus:border-[#d3b0c7] outline-none rounded p-2'
+                                            onChange={(e) => handleInputChange(index, 'midPoint', e.target.value)}
+                                        />
                                     </div>
                                     <div className='w-full flex justify-between items-center gap-5 mb-3'>
                                         <label htmlFor="">Point 1</label>
-                                        <input type='text' className='border-2 border-[#e7e7e7] hover:border-[#d3b0c7] focus:border-[#d3b0c7] outline-none rounded p-2' />
+                                        {/* <input type='text' className='border-2 border-[#e7e7e7] hover:border-[#d3b0c7] focus:border-[#d3b0c7] outline-none rounded p-2' /> */}
+                                        <input
+                                            type='text'
+                                            className='border-2 border-[#e7e7e7] hover:border-[#d3b0c7] focus:border-[#d3b0c7] outline-none rounded p-2'
+                                            onChange={(e) => handleInputChange(index, 'point1', e.target.value)}
+                                        />
                                     </div>
                                     <div className='flex justify-between items-center gap-5 mb-3'>
                                         <label htmlFor="">Point 2</label>
-                                        <input type='text' className='border-2 border-[#e7e7e7] hover:border-[#d3b0c7] focus:border-[#d3b0c7] outline-none rounded p-2' />
+                                        {/* <input type='text' className='border-2 border-[#e7e7e7] hover:border-[#d3b0c7] focus:border-[#d3b0c7] outline-none rounded p-2' /> */}
+                                        <input
+                                            type='text'
+                                            className='border-2 border-[#e7e7e7] hover:border-[#d3b0c7] focus:border-[#d3b0c7] outline-none rounded p-2'
+                                            onChange={(e) => handleInputChange(index, 'point2', e.target.value)}
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +165,7 @@ const InputPoints = () => {
                             <Button1>Save</Button1>
                         </Link> */}
 
-                        <button type="submit" className='w-fit mx-auto bg-[#643843] text-sm text-white px-5 py-2 rounded-lg shadow-lg hover:bg-[#75515a] cursor-pointer'>Save</button>
+                        <button onClick={handleSubmit} type="submit" className='w-fit mx-auto bg-[#643843] text-sm text-white px-5 py-2 rounded-lg shadow-lg hover:bg-[#75515a] cursor-pointer'>Save</button>
                     </div>
                 </div>
             </div>

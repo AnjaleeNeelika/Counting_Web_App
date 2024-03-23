@@ -17,10 +17,12 @@ def input_points():
         if videos is None:
             return jsonify({'error': 'Videos collection not found'}), 500
         
+        # Delete existing input points for the video
+        videos.update_one({'_id': ObjectId(video_id)}, {'$unset': {'input_points': ""}})
+        
         # Get the input points from the data
         input_points_data = data.get('input_points', [])
 
-                # Update the existing document by pushing the new input points
         result = videos.update_one({'_id': ObjectId(video_id)}, {'$push': {'input_points': {'$each': input_points_data}}}, upsert=False)
         print(f"Modified {result.modified_count} document(s)")
 
