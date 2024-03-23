@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Button1 from '../components/Button1';
 import axios from 'axios';
 
@@ -8,6 +8,7 @@ const BASE_URL = 'http://localhost:5000';
 const NumberOfActions = () => {
     const location = useLocation();
     const currentLocation = location.pathname;
+    const navigate = useNavigate();
     const searchParams = new URLSearchParams(location.search);
     const videoPath = searchParams.get('videoPath');
     console.log(videoPath);
@@ -47,17 +48,21 @@ const NumberOfActions = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log("Number of Steps:", numberOfSteps); // Log the number of steps
+        console.log("Video ID:", videoId); // Log the video ID
         try {
             await axios.post(`${BASE_URL}/number_of_action`, {
                 _id: videoId,
                 number_of_steps: numberOfSteps
             });
-            // Optionally, you can redirect the user or show a success message here
+            console.log("Request sent successfully!"); // Log success
+            navigate(`/video-input-type/no-of-actions/input-points/${videoId}/${numberOfSteps}`);
         } catch (error) {
             console.error('Error posting number of actions:', error);
             // Handle error
         }
     };
+
 
 
 
@@ -68,13 +73,19 @@ const NumberOfActions = () => {
                     <h2 className='mx-auto text-center w-fit text-[#8a5374]'>Count the Number of Steps Per One Action</h2>
                     <div className='w-fit mx-auto flex flex-wrap justify-center items-center mt-3 mb-8'>
                         <span className='text-sm mr-0 md:mr-5 mb-2 md:mb-0'>Enter the number of steps</span>
-                        {/* <input type="text" name="" id="" className='text-sm border-2 border-[#ddd] hover:border-[#b89ead] focus:border-[#b89ead] outline-none px-4 py-2 rounded' /> */}
-                        <input type="text" name="numberOfSteps" id="numberOfSteps" value={numberOfSteps} onChange={(e) => setNumberOfSteps(e.target.value)} className='text-sm border-2 border-[#ddd] hover:border-[#b89ead] focus:border-[#b89ead] outline-none px-4 py-2 rounded' />
+                        <input
+                            type="text"
+                            name="numberOfSteps"
+                            id="numberOfSteps"
+                            value={numberOfSteps}
+                            onChange={(e) => setNumberOfSteps(e.target.value)}
+                            className='text-sm border-2 border-[#ddd] hover:border-[#b89ead] focus:border-[#b89ead] outline-none px-4 py-2 rounded'
+                        />
                     </div>
-                    <Link to={`/video-input-type/no-of-actions/input-points/${videoId}`}>
-                        <Button1>Enter</Button1>
-                    </Link>
+                    <button type="submit" className='w-fit mx-auto bg-[#643843] text-sm text-white px-5 py-2 rounded-lg shadow-lg hover:bg-[#75515a] cursor-pointer'>Enter</button>
+                    {/* <Button1 type="submit">Enter</Button1> */}
                 </form>
+
                 <div className='bg-slate-300 lg:w-[900px] w-full max-h-[500px] h-fit mx-auto mt-5 shadow-md'>
                     {fileName && (
                         <video className="w-full" autoPlay loop controls muted>
