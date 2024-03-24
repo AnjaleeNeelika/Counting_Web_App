@@ -40,6 +40,7 @@ const VideoUploader = ({ onVideoUpload }) => {
     const [video, setVideo] = useState(null);
     const [id, setId] = useState(null);
     const [fileName, setFileName] = useState("No file selected");
+    const [uploadMsg, setUploadMsg] = useState(''); 
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
