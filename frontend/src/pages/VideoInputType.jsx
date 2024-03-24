@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import EmptyError from '../components/EmptyError';
+import MessageBox from '../components/MessageBox';
 
 const VideoInputType = () => {
     const [selectedOption, setSelectedOption] = useState('');
@@ -42,7 +42,7 @@ const VideoInputType = () => {
                     </div>
                     
                     {error && 
-                        <EmptyError message='Please select an option to continue' />
+                        <MessageBox type='warning' message='Please select an option to continue' />
                     }
 
                     <div className='w-full px-5 mx-auto mt-8 mb-10 flex justify-between items-center gap-10'>
