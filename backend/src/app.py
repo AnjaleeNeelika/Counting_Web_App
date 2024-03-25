@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_pymongo import PyMongo
+from dotenv import load_dotenv
+import os
 
 from blueprints.videos_upload import video_upload_bp
 from blueprints.view_fulldetect import view_fulldetect_bp
@@ -10,10 +12,14 @@ from blueprints.get_angles import get_angles_bp
 
 app = Flask(__name__)
 
+load_dotenv()
+
 CORS(app)
 
+mongo_uri = os.getenv('MONGO_URI')
 
-app.config['MONGO_URI'] = 'mongodb+srv://root:root1234@test1.rno2onb.mongodb.net/test1?retryWrites=true&w=majority&appName=test1'
+
+app.config['MONGO_URI'] = mongo_uri
 mongo = PyMongo(app)
 
 app.register_blueprint(video_upload_bp)
