@@ -42,6 +42,8 @@ const InputPoints = () => {
     }, []);
 
 
+
+
     const handleInputChange = (index, field, value) => {
         setFormData(prevData => {
             const newData = [...prevData]; // Create a copy of the previous data array
@@ -69,7 +71,7 @@ const InputPoints = () => {
                 input_points: formData
             });
             console.log("Request sent successfully!"); // Log success
-            navigate(`/video-input-type/angles/${videoId}`);
+            navigate(`/video-input-type/angles/${videoId}/${no_of_actions}`);
         } catch (error) {
             console.error('Error posting number of actions:', error);
             // Handle error
