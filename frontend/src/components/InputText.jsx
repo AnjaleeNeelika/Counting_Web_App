@@ -21,7 +21,9 @@ const InputText = (props) => {
             {props.errorMsg === '' ? (
                 <div></div>
             ) : (
-                <div className='text-red-500 text-xs'>Error Message</div>
+                <div className='text-red-500 text-xs'>
+                    {props.errorMsg}
+                </div>
             )}
             
         </div>

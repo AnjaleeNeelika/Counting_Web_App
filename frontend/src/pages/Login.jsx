@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import InputText from '../components/InputText';
-import { Link } from 'react-router-dom';
+import { Link, redirect, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const navigate = useNavigate();
+
     const [values, setValues] = useState({
         username: '',
         password: '',
@@ -18,21 +20,33 @@ const Login = () => {
         password: '',
     });
 
-    const handleSubmit = () => {
-        if(values['username'] === '') {
-            setErrorMsg({...errorMsg, ['username']: 'Please enter the username'})
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        setErrorMsg({
+            username: '',
+            password: '',
+        });
+
+        if(values.username === '') {
+            setErrorMsg(prevState => ({...prevState, username: 'Please enter the username'}))
         } 
 
-        if(values['password'] === '') {
-            setErrorMsg({...errorMsg, ['password']: 'Please enter the password'})
-        }
-
-        if(errorMsg['username'] === '' && errorMsg['password'] === '') {
-            console.log('Success')
-        } else if(errorMsg['username'] !== '' || errorMsg['password'] !== '') {
-
+        if(values.password === '') {
+            setErrorMsg(prevState => ({...prevState, password: 'Please enter the password'}))
         }
     }
+
+    useEffect(() => {
+        if(errorMsg.username === '' && errorMsg.password === '') {
+            console.log('Success');
+            setValues({
+                username: '',
+                password: '',
+            })
+            navigate('/login');
+        }
+    }, [errorMsg]);
 
     return (
         <div className='w-full h-full p-10 flex items-center justify-center'>
@@ -50,7 +64,7 @@ const Login = () => {
                             <Link to={{pathname: '/reset-password'}} className='hover:border-b hover:border-blue-500'>Forgot Password?</Link>
                         </div>
                         <div className='flex justify-center items-center mt-8'>
-                            <button className='w-fit bg-[#503c3c] text-white text-sm px-5 py-2 rounded-md shadow-md hover:bg-[#6e5353] hover:-translate-y-1 duration-300'>Login</button>
+                            <button onClick={handleSubmit} className='w-fit bg-[#503c3c] text-white text-sm px-5 py-2 rounded-md shadow-md hover:bg-[#6e5353] hover:-translate-y-1 duration-300'>Login</button>
                         </div>
                     </form>
                     <div className='flex justify-center items-center gap-2 text-sm mt-5'>
