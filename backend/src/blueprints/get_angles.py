@@ -36,6 +36,7 @@ def get_video_details(video_id):
             print(input_points)
 
            
+           #replace point numbers to mediapipe numbers
             replacement_map = {'0': 11, '1': 12, '2': 13, '3': 14, '4': 15, '5': 16, '6': 23, '7': 24, '8': 25, '9': 26}
 
             for point in input_points:
@@ -77,10 +78,6 @@ def get_video_details(video_id):
             output_video_file_path = output_video_file_path.replace("\\", "/")
 
             print(output_video_file_path)
-
-
-
-
 
 
             if os.path.exists(output_video_file_path):
