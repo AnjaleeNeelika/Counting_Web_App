@@ -1,7 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_pymongo import PyMongo
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
+import dotenv
 import os
 
 from blueprints.videos_upload import video_upload_bp
@@ -14,7 +15,7 @@ from blueprints.get_points import get_points_bp
 
 app = Flask(__name__)
 
-load_dotenv()
+dotenv.load_dotenv()
 
 CORS(app)
 
