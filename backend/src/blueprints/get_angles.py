@@ -28,16 +28,64 @@ def get_video_details(video_id):
         if video_document:
             video_file_path = video_document.get('path')
             parent_video_file_path = os.path.dirname(video_file_path)
+            nuber_of_actions = video_document.get('number_of_actions')
+            input_points = video_document.get('input_points')
+
             print(parent_video_file_path)
+            print(nuber_of_actions)
+            print(input_points)
+
+           
+           #replace point numbers to mediapipe numbers
+            replacement_map = {'0': 11, '1': 12, '2': 13, '3': 14, '4': 15, '5': 16, '6': 23, '7': 24, '8': 25, '9': 26}
+
+            for point in input_points:
+                mid_point = point['midPoint']
+                point1 = point['point1']
+                point2 = point['point2']
+    
+                mid_point_replaced = ''.join(str(replacement_map.get(char, char)) for char in mid_point)
+                point1_replaced = ''.join(str(replacement_map.get(char, char)) for char in point1)
+                point2_replaced = ''.join(str(replacement_map.get(char, char)) for char in point2)
+    
+                point['midPoint'] = mid_point_replaced
+                point['point1'] = point1_replaced
+                point['point2'] = point2_replaced
+
+            print("Modified input_points:", input_points)
+
+
+            action_landmarks_list = []
+            mid_points_landmarks_list = []
+
+            for points in input_points:
+                mid_point = int(points['midPoint'])
+                point1 = int(points['point1'])
+                point2 = int(points['point2'])
+
+                
+                action_landmarks = [point1,mid_point,point2]
+                mid_points_landmarks = mid_point
+
+                action_landmarks_list.append(action_landmarks)
+                mid_points_landmarks_list.append(mid_points_landmarks)
+
+            print(action_landmarks_list)
+            print(mid_points_landmarks_list)
+
             file_name, _ = os.path.splitext(os.path.basename(video_file_path))
             output_video_file_path = os.path.join(parent_video_file_path, 'get_angles_videos', f'{file_name}.mp4')
             output_video_file_path = output_video_file_path.replace("\\", "/")
 
             print(output_video_file_path)
 
+
             if os.path.exists(output_video_file_path):
                 print("video exists")
                 return jsonify({'filePath': output_video_file_path})
+            
+
+            
                 
             else:
                 cap = cv2.VideoCapture(video_file_path)
@@ -68,28 +116,42 @@ def get_video_details(video_id):
                     lmList, _ = pd.findPosition(frame, draw=0, bboxWithHands=0)
 
                     if lmList:
-                        action1_landmarks = [lmList[i] for i in [12, 14, 16]]
-                        action2_landmarks = [lmList[i] for i in [11, 13, 15,]]
+                        for landmarks in action_landmarks_list:
+                             point =[lmList[i] for i in landmarks]
 
-                        mid1_x = int(action1_landmarks[1][0])
-                        mid1_y = int(action1_landmarks[1][1])
+                             mid1_x = int(point[1][0])
+                             mid1_y = int(point[1][1])
 
-                        cv2.circle(frame, (mid1_x, mid1_y), 5, (0, 0, 255), cv2.FILLED) 
+                             cv2.circle(frame, (mid1_x, mid1_y), 5, (0, 0, 255), cv2.FILLED) 
 
-                        mid2_x = int(action2_landmarks[1][0])
-                        mid2_y = int(action2_landmarks[1][1])
+                             for i in range(len(point) - 1):
+                               x1, y1 = point[i][:2]
+                               x2, y2 = point[i + 1][:2]
+                               cv2.line(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 3)  # Draw line between consecutive landmarks
+
+
+                        # action1_landmarks = [lmList[i] for i in [12, 14, 16]]
+                        # action2_landmarks = [lmList[i] for i in [11, 13, 15,]]
+
+                        # mid1_x = int(action1_landmarks[1][0])
+                        # mid1_y = int(action1_landmarks[1][1])
+
+                        # cv2.circle(frame, (mid1_x, mid1_y), 5, (0, 0, 255), cv2.FILLED) 
+
+                        # mid2_x = int(action2_landmarks[1][0])
+                        # mid2_y = int(action2_landmarks[1][1])
                         
-                        cv2.circle(frame, (mid2_x, mid2_y), 5, (0, 0, 255), cv2.FILLED)
+                        # cv2.circle(frame, (mid2_x, mid2_y), 5, (0, 0, 255), cv2.FILLED)
 
-                        for i in range(len(action1_landmarks) - 1):
-                            x1, y1 = action1_landmarks[i][:2]
-                            x2, y2 = action1_landmarks[i + 1][:2]
-                            cv2.line(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 3)  # Draw line between consecutive landmarks
+                        # for i in range(len(action1_landmarks) - 1):
+                        #     x1, y1 = action1_landmarks[i][:2]
+                        #     x2, y2 = action1_landmarks[i + 1][:2]
+                        #     cv2.line(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 3)  # Draw line between consecutive landmarks
 
-                        for i in range(len(action2_landmarks) - 1):
-                            x1, y1 = action2_landmarks[i][:2]
-                            x2, y2 = action2_landmarks[i + 1][:2]
-                            cv2.line(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 3)  # Draw line between consecutive landmarks
+                        # for i in range(len(action2_landmarks) - 1):
+                        #     x1, y1 = action2_landmarks[i][:2]
+                        #     x2, y2 = action2_landmarks[i + 1][:2]
+                        #     cv2.line(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 3)  # Draw line between consecutive landmarks
 
 
                     out.write(frame)
