@@ -73,8 +73,9 @@ const Angles = () => {
                             <td>
                                 <input type="text" name="" id="" disabled className='border w-20 md:w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
                             </td>
-                            <td>
+                            <td className='flex my-1'>
                                 <input type="number" max={100} min={1} name="" id="" className='border w-20 md:w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
+                                <button className='bg-[#b0578d] text-white text-xs px-2 ml-2 rounded-full hover:bg-[#974b79]'>Apply</button>
                             </td>
                             <td>
                                 <input type="text" name="" id="" disabled className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
@@ -87,8 +88,9 @@ const Angles = () => {
                             <td>
                                 <input type="text" name="" id="" disabled className='border w-20 md:w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
                             </td>
-                            <td>
+                            <td className='flex my-1'>
                                 <input type="number" max={100} min={1} name="" id="" className='border w-20 md:w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
+                                <button className='bg-[#b0578d] text-white text-xs px-2 ml-2 rounded-full hover:bg-[#974b79]'>Apply</button>
                             </td>
                             <td>
                                 <input type="text" name="" id="" disabled className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
@@ -101,8 +103,9 @@ const Angles = () => {
                             <td>
                                 <input type="text" name="" id="" disabled className='border w-20 md:w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
                             </td>
-                            <td>
+                            <td className='flex my-1'>
                                 <input type="number" max={100} min={1} name="" id="" className='border w-20 md:w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
+                                <button className='bg-[#b0578d] text-white text-xs px-2 ml-2 rounded-full hover:bg-[#974b79] hover:-translate-y-0.5'>Apply</button>
                             </td>
                             <td>
                                 <input type="text" name="" id="" disabled className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />

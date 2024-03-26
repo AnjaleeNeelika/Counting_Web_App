@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_pymongo import PyMongo
+from dotenv import load_dotenv
+import os
 
 from blueprints.videos_upload import video_upload_bp
 from blueprints.view_fulldetect import view_fulldetect_bp
@@ -12,10 +14,14 @@ from blueprints.get_points import get_points_bp
 
 app = Flask(__name__)
 
+load_dotenv()
+
 CORS(app)
 
+mongo_uri = os.getenv('MONGO_URI')
 
-app.config['MONGO_URI'] = 'mongodb://localhost/mediapipe-project'
+
+app.config['MONGO_URI'] = mongo_uri
 mongo = PyMongo(app)
 
 app.register_blueprint(video_upload_bp)

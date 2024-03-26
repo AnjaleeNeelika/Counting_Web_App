@@ -94,26 +94,20 @@ const InputPoints = () => {
                     <img src={PoseLandmarks} className='w-full md:w-[20vw]' />
                     <div className='w-full md:w-fit p-5 md:block flex justify-between'>
                         <div className='w-fit'>
-                            11 - left shoulder<br />
-                            12 - right shoulder<br />
-                            13 - left elbow<br />
-                            14 - right elbow<br />
-                            15 - left wrist<br />
-                            16 - right wrist<br />
-                            17 - left pinky<br />
-                            18 - right pinky<br />
-                            19 - left index<br />
+                            0 - left shoulder<br />
+                            1 - right shoulder<br />
+                            2 - left elbow<br />
+                            3 - right elbow<br />
+                            4 - left wrist<br />
+                            5 - right wrist<br />
                         </div>
                         <div className='w-fit'>
-                            20 - right index<br />
-                            21 - left thumb<br />
-                            22 - right thumb<br />
-                            23 - left hip<br />
-                            24 - right hip<br />
-                            25 - left knee<br />
-                            26 - right knee<br />
-                            27 - left ankle<br />
-                            28 - right ankle<br />
+                            6 - left hip<br />
+                            7 - right hip<br />
+                            8 - left knee<br />
+                            9 - right knee<br />
+                            10 - left ankle<br />
+                            11 - right ankle<br />
                         </div>
                     </div>
                 </div>
