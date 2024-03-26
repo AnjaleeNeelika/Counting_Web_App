@@ -5,10 +5,12 @@ const InputText = (props) => {
         <div className='relative'>
             <input 
                 type={props.type}
-                name="email" 
-                id="email"
+                name={props.name} 
+                id={props.name}
                 className='peer h-10 px-4 w-full border border-gray-300 rounded text-gray-900 focus:outline-none focus:border-[#ca9a9a] placeholder-transparent'
                 placeholder={props.label}
+                value={props.value}
+                onChange={props.onChange}
             />
             <label 
                 htmlFor="email" 
@@ -16,6 +18,12 @@ const InputText = (props) => {
             >
                 {props.label}
             </label>
+            {props.errorMsg === '' ? (
+                <div></div>
+            ) : (
+                <div className='text-red-500 text-xs'>Error Message</div>
+            )}
+            
         </div>
     )
 }

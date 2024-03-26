@@ -38,7 +38,7 @@ const UploadVideo = () => {
                         <div className='w-full md:w-fit mx-auto bg-white p-5 rounded-lg shadow-lg'>
                             <VideoUploader onVideoUpload={handleUploadSuccess} />
                             <form onSubmit={handleUploadClick} className='mt-5'>
-                                {uploadError !== '' ? (
+                                {uploadError === '' ? (
                                     <Link
                                         to={`/video-input-type/no-of-actions/${videoId}`}
                                     >
