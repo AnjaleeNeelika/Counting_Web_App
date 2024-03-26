@@ -37,7 +37,7 @@ const Navbar = () => {
                 <a href="" className='text-white text-3xl font-semibold'>Counting App</a>
 
                 <div>
-                    <ul className={`md:flex md:justify-between md:items-center gap-10 md:pt-0 pt-5 absolute md:static md:z-auto left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 transition-200 ease-in bg-white md:bg-transparent md:text-white ${open ? 'top-20 opacity-100' : 'top-[-490px] md:opacity-100 opacity-0'}`}>
+                    <ul className={`h-fit md:flex md:justify-between md:items-center gap-10 md:py-0 py-10 absolute md:static md:z-auto left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 transition-200 ease-in bg-white md:bg-transparent md:text-white ${open ? 'top-20 opacity-100 shadow-md' : 'top-[-490px] md:opacity-100 opacity-0'}`}>
                         <li className={`w-fit hover:text-pink-300 transition-300 hover:border-b-2 hover:border-b-pink-300 hover:pb-1 md:mb-0 mb-5 ${isActive === 'home' ? 'text-pink-300 border-b-2 border-b-pink-300 pb-1' : ''}`}>
                             <Link to='/home' onClick={() => handleActiveLink('home')}>Home</Link>
                         </li>
