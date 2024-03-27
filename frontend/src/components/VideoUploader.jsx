@@ -98,7 +98,7 @@ const VideoUploader = ({ onVideoUpload }) => {
                         </>
                     }
                 </div>
-                <section className='flex justify-between items-center bg-[#85586f] mt-3 p-4 text-[#ffefef] rounded-lg'>
+                <section className='flex flex-wrap justify-between items-center bg-[#85586f] mt-3 p-4 text-[#ffefef] rounded-lg'>
                     <FaFileVideo className='#1475cf h-5 w-5' />
                     <span className='flex gap-2 justify-center items-center'>
                         {fileName}
@@ -111,7 +111,7 @@ const VideoUploader = ({ onVideoUpload }) => {
                             className='w-5 h-5 cursor-pointer'
                         />
                     </span>
-                    <button type="submit">Upload</button>
+                    <button type="submit" className='mx-auto'>Upload</button>
                 </section>
             </form>
         </div>

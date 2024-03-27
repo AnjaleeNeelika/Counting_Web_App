@@ -68,7 +68,7 @@ const Signup = () => {
     return (
         <div className='w-full h-full p-10 flex items-center justify-center'>
             <div className='bg-white max-w-[400px] w-full rounded-md shadow-md p-10'>
-                <h2 className='text-[#a87c7c] w-fit mx-auto'>Create An Account</h2>
+                <h2 className='text-[#a87c7c] w-fit mx-auto text-center'>Create An Account</h2>
                 <div className='mt-10'>
                     <form action="" method="post">
                         <div className='mt-5'>
@@ -87,7 +87,7 @@ const Signup = () => {
                             <button onClick={handleSubmit} className='w-fit bg-[#503c3c] px-5 py-2 text-white rounded-md shadow-md text-sm hover:bg-[#6e5353] hover:-translate-y-1 duration-300'>Sign Up</button>
                         </div>
                     </form>
-                    <div className='flex justify-center items-center gap-2 text-sm mt-5'>
+                    <div className='flex flex-wrap justify-center items-center gap-2 text-sm mt-5'>
                         Already have an account?
                         <Link to={{pathname: '/login'}} className='text-blue-700 hover:text-500 hover:border-b hover:border-blue-500'>Login</Link>
                     </div>

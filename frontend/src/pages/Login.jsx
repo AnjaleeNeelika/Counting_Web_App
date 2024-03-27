@@ -67,7 +67,7 @@ const Login = () => {
                             <button onClick={handleSubmit} className='w-fit bg-[#503c3c] text-white text-sm px-5 py-2 rounded-md shadow-md hover:bg-[#6e5353] hover:-translate-y-1 duration-300'>Login</button>
                         </div>
                     </form>
-                    <div className='flex justify-center items-center gap-2 text-sm mt-5'>
+                    <div className='flex flex-wrap justify-center items-center gap-2 text-sm mt-5'>
                         Don't have an account?
                         <Link to={{pathname: '/signup'}} className='text-blue-700 hover:text-blue-500 hover:border-b hover:border-blue-500'>Sign Up</Link>
                     </div>
