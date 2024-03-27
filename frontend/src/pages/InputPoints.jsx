@@ -92,7 +92,7 @@ const InputPoints = () => {
                 </div>
                 <div className='flex flex-wrap justify-between items-center bg-white p-5 rounded-md shadow-md w-full md:w-fit'>
                     <img src={PoseLandmarks} className='w-full md:w-[20vw]' />
-                    <div className='w-full md:w-fit p-5 md:block flex justify-between'>
+                    <div className='w-full md:w-fit p-5 md:block flex flex-wrap justify-between'>
                         <div className='w-fit'>
                             0 - left shoulder<br />
                             1 - right shoulder<br />
@@ -113,9 +113,9 @@ const InputPoints = () => {
                 </div>
             </div>
 
-            <div className='flex justify-center items-center p-10'>
-                <div>
-                    <div className='flex gap-5 w-fit mx-auto bg-[#a57d97ce] text-white mb-5 py-3 px-5 rounded shadow'>
+            <div className='flex flex-wrap justify-center items-center p-10'>
+                <div className='w-full'>
+                    <div className='flex flex-wrap justify-center items-center text-center gap-5 w-fit mx-auto bg-[#a57d97ce] text-white mb-5 py-3 px-5 rounded shadow'>
                         <h3>No. of Actions: {no_of_actions}</h3>
                     </div>
                     <div className='bg-white p-5 md:px-14 md:py-5 rounded-md shadow-md max-h-full h-fit overflow-auto flex flex-wrap justify-between items-center md:gap-20'>
@@ -154,7 +154,7 @@ const InputPoints = () => {
                             </div>
                         ))}
                     </div>
-                    <div className='mt-5'>
+                    <div className='mt-5 text-center'>
                         {/* <Link to={`/video-input-type/angles/${videoId}`}>
                             <Button1>Save</Button1>
                         </Link> */}
