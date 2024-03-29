@@ -98,20 +98,23 @@ const VideoUploader = ({ onVideoUpload }) => {
                         </>
                     }
                 </div>
-                <section className='flex flex-wrap justify-between items-center bg-[#85586f] mt-3 p-4 text-[#ffefef] rounded-lg'>
-                    <FaFileVideo className='#1475cf h-5 w-5' />
-                    <span className='flex gap-2 justify-center items-center'>
-                        {fileName}
-                        <MdDelete
-                            onClick={() => {
-                                setFile(null);
-                                setFileName("No file selected");
-                                setVideo(null);
-                            }}
-                            className='w-5 h-5 cursor-pointer'
-                        />
-                    </span>
-                    <button type="submit" className='mx-auto'>Upload</button>
+                <section className='flex flex-wrap md:justify-between justify-center items-center gap-5 bg-[#85586f] mt-3 p-4 text-[#ffefef] rounded-lg'>
+                    <div className='flex flex-wrap gap-2 justify-between items-center'>
+                        <FaFileVideo className='#1475cf h-5 w-5' />
+                        <span className='flex gap-1 justify-center items-center'>
+                            {fileName}
+                            <MdDelete
+                                onClick={() => {
+                                    setFile(null);
+                                    setFileName("No file selected");
+                                    setVideo(null);
+                                }}
+                                className='w-5 h-5 cursor-pointer'
+                            />
+                        </span>
+                    </div>
+                    
+                    <button type="submit" className=''>Upload</button>
                 </section>
             </form>
         </div>
