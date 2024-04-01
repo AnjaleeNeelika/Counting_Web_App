@@ -100,6 +100,7 @@ def get_video_details(video_id):
                 frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
                 fps = int(cap.get(cv2.CAP_PROP_FPS))
                 codec = int(cap.get(cv2.CAP_PROP_FOURCC))  # encoding video frame
+                print(codec)
                 out = cv2.VideoWriter(output_video_file_path, codec, fps, (frame_width, frame_height))
 
                 total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))

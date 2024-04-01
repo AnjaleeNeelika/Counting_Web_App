@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import Button1 from '../components/Button1';
 import axios from 'axios';
+import { AiOutlineExclamationCircle } from 'react-icons/ai';
 
 const BASE_URL = 'http://localhost:5000';
 
@@ -87,17 +87,23 @@ const NumberOfActions = () => {
                 </form>
 
                 <div className='bg-slate-300 lg:w-[900px] w-full max-h-[500px] h-fit mx-auto mt-5 shadow-md'>
-                    {fileName ? (
+                    {/* {fileName ? (
                         <video className="w-full" autoPlay loop controls muted>
                             <source src={`/videos/fulldetect_videos/${fileName}`} type="video/mp4" />
                         </video>
                     ) : (
-                        <div className='w-full h-[400px] flex justify-center items-center'>
-                            <div className='text-semibold flex justify-between items-center gap-3'>
-                                Video unavailable
-                            </div>
-                            
+                        <div className='w-full h-[400px] flex justify-center items-center bg-gray-800 text-white text-2xl p-10'>
+                            <div className='text-semibold flex justify-between items-center gap-2'>
+                                <AiOutlineExclamationCircle className='text-4xl' />
+                                Video Unavailable
+                            </div>                            
                         </div>
+                    )} */}
+
+                    {fileName && (
+                        <video className="w-full" autoPlay loop controls muted>
+                            <source src={`/videos/fulldetect_videos/${fileName}`} type="video/mp4" />
+                        </video>
                     )}
                 </div>
             </div>
