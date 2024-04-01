@@ -41,7 +41,7 @@ const Angles = () => {
 
     return (
         <div className='w-full h-full overflow-auto p-6 md:p-10 flex flex-wrap justify-center items-center gap-10'>
-            <div className='bg-slate-300 w-full md:w-[50vw] h-fit max-h-[60vh]'>
+            <div className='bg-slate-300 w-full lg:w-[50vw] h-fit max-h-[60vh]'>
                 {/* <video src='/assets/videos/downloaded-video-5.mp4' controls autoPlay className='w-full'></video> */}
                 {fileName && (
                     <video className="w-full" autoPlay loop controls muted>
@@ -49,7 +49,7 @@ const Angles = () => {
                     </video>
                 )}
             </div>
-            <div className='w-full bg-white p-5 md:p-10 rounded-md shadow-md'>
+            <div className='max-w-[800px] w-full bg-white p-5 md:p-10 rounded-md shadow-md'>
                 <div className='mb-3'>
                     <h2 className='mb-4'>Angles</h2>
                     <h3>Enter a threshold value you want</h3>
