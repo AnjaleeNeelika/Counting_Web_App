@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { FaFileVideo } from 'react-icons/fa';
 import axios from 'axios';
 import { MdCloudUpload, MdDelete } from 'react-icons/md';
+import MessageBox from './MessageBox';
 // import { FaFileVideo } from 'react-icons/fa';
 
 const BASE_URL = 'http://localhost:5000';
@@ -41,6 +42,7 @@ const VideoUploader = ({ onVideoUpload }) => {
     const [id, setId] = useState(null);
     const [fileName, setFileName] = useState("No file selected");
     const [uploadMsg, setUploadMsg] = useState(''); 
+    const [msgType, setMsgType] = useState('');
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
@@ -64,17 +66,26 @@ const VideoUploader = ({ onVideoUpload }) => {
             onVideoUpload(id);
             setId(id);
             alert(`Video uploaded successfully with ID: ${id}`);
+            setUploadMsg(`Video uploaded successfullly with ID: ${id}.`);
+            setMsgType('success');
 
             // Redirect or do something else after successful upload
         } catch (error) {
             alert('Failed to upload video. Please try again.');
             console.error('Error:', error);
+            setUploadMsg('Failed to upload the video. Please try again.');
+            setMsgType('warning');
         }
     };
 
 
     return (
         <div className='w-full'>
+            {uploadMsg && 
+                <div>
+                    <MessageBox type={msgType} message={uploadMsg} />
+                </div>
+            }
             <form onSubmit={handleSubmit} className='w-full'>
                 <input
                     type="file"
@@ -88,7 +99,7 @@ const VideoUploader = ({ onVideoUpload }) => {
                     onClick={() => document.querySelector('.input-field').click()}
                 >
                     {video ?
-                        <video className='h-full w-full' controls autoPlay loop>
+                        <video className='h-full w-full' controls autoPlay loop muted>
                             <source src={video} type='video/mp4' />
                         </video>
                         :

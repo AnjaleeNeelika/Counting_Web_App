@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import MessageBox from '../components/MessageBox';
+import VideoInputDevice from '../components/VideoInputDevice';
 
 const VideoInputType = () => {
     const [selectedOption, setSelectedOption] = useState('');
     const [path, setPath] = useState('');
     const [error, setError] = useState(false);
+    const [showPopup, setShowPopup] = useState(false);
     const location = useLocation();
     const currentLocation = location.pathname;
 
     useEffect(() => {
         if(selectedOption === 'Live') {
-            setPath(`${currentLocation}/live-video`)
+            // setPath(`${currentLocation}/live-video`)
+            // setShowPopup(true);
         } else if(selectedOption === 'Upload') {
             setPath(`${currentLocation}/upload-video`)
         }
@@ -24,6 +27,11 @@ const VideoInputType = () => {
     }
 
     const handleSubmit = () => {
+        if (selectedOption === 'Live') {
+            setShowPopup(true);
+        }
+
+
         if(selectedOption === '') {
             setError(true);
         } else {
@@ -35,6 +43,7 @@ const VideoInputType = () => {
 
     return (
         <div className='w-full h-full overflow-auto p-5 md:p-10 flex flex-wrap justify-center items-center'>
+            {showPopup && <VideoInputDevice onClose={() => setShowPopup(false)} nextPath='/video-input-type/live-Video' />}
             <form method='' className='bg-[#fff] w-full md:w-fit h-fit shadow-lg p-5 md:p-10 rounded-md flex justify-center items-center text-center'>
                 <div>
                     <div className='w-full text-center text-2xl font-semibold mx-auto'>

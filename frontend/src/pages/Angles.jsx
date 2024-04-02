@@ -27,7 +27,7 @@ const Angles = () => {
                 const fileName = parts.pop();
 
                 setFileName(fileName);
-                console.log(fileName)
+                console.log('filename:',fileName)
                 setVideoSrc(filePath);
                 setVideoId(id);
             } catch (error) {
