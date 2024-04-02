@@ -118,7 +118,7 @@ const InputPoints = () => {
                     <div className='flex flex-wrap justify-center items-center text-center gap-5 w-fit mx-auto bg-[#a57d97ce] text-white mb-5 py-3 px-5 rounded shadow'>
                         <h3>No. of Actions: {no_of_actions}</h3>
                     </div>
-                    <div className='bg-white p-5 md:px-14 md:py-5 rounded-md shadow-md max-h-full h-fit overflow-auto flex flex-wrap justify-between items-center md:gap-20'>
+                    <div className='max-w-full w-fit bg-white p-5 md:px-14 md:py-5 rounded-md shadow-md max-h-full h-fit overflow-auto flex flex-wrap justify-between items-center md:gap-20 mx-auto'>
                         {[...Array(Number(no_of_actions))].map((_, index) => (
                             <div key={index} className='py-3'>
                                 <h4>Action {index + 1}</h4>

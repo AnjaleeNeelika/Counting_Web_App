@@ -73,20 +73,24 @@ const NumberOfActions = () => {
                     <h2 className='mx-auto text-center w-fit text-[#8a5374]'>Count the Number of Steps Per One Action</h2>
                     <div className='w-fit mx-auto flex flex-wrap justify-center items-center mt-3 mb-8'>
                         <span className='text-sm mr-0 md:mr-5 mb-2 md:mb-0'>Enter the number of steps</span>
-                        <input
-                            type="text"
-                            name="numberOfSteps"
-                            id="numberOfSteps"
-                            value={numberOfSteps}
-                            onChange={(e) => setNumberOfSteps(e.target.value)}
-                            className='text-sm border-2 border-[#ddd] hover:border-[#b89ead] focus:border-[#b89ead] outline-none px-4 py-2 rounded'
-                        />
+                        <div>
+                            <input
+                                type="text"
+                                name="numberOfSteps"
+                                id="numberOfSteps"
+                                value={numberOfSteps}
+                                onChange={(e) => setNumberOfSteps(e.target.value)}
+                                className='text-sm border-2 border-[#ddd] hover:border-[#b89ead] focus:border-[#b89ead] outline-none px-4 py-2 rounded'
+                            />
+                        </div>
+                        
                     </div>
                     <button type="submit" className='w-fit mx-auto bg-[#643843] text-sm text-white px-5 py-2 rounded-lg shadow-lg hover:bg-[#75515a] cursor-pointer'>Enter</button>
                     {/* <Button1 type="submit">Enter</Button1> */}
                 </form>
 
                 <div className='bg-slate-300 lg:w-[900px] w-full max-h-[500px] h-fit mx-auto mt-5 shadow-md'>
+                    {/* to show not found error */}
                     {/* {fileName ? (
                         <video className="w-full" autoPlay loop controls muted>
                             <source src={`/videos/fulldetect_videos/${fileName}`} type="video/mp4" />

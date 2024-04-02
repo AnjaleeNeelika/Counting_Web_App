@@ -14,7 +14,6 @@ import DownloadedVideos from './pages/DownloadedVideos';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ResetPassword from './pages/ResetPassword';
-import VideoInputDevice from './pages/VideoInputDevice';
 
 const App = () => {
     return (
@@ -28,7 +27,6 @@ const App = () => {
                     <Route path='/login' element={<Login />} />
                     <Route path='/signup' element={<Signup />} />
                     <Route path='/reset-password' element={<ResetPassword />} />
-                    <Route path='/video-input-device' element={<VideoInputDevice />} />
                     <Route path='/video-input-type' element={<VideoInputType />} />
                     <Route path='/video-input-type/live-Video' element={<LiveVideo />} />
                     <Route path='/video-input-type/live-Video/downloaded-videos/no-of-actions' element={<NumberOfActions />} />

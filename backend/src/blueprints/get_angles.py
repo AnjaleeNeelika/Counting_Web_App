@@ -83,10 +83,7 @@ def get_video_details(video_id):
             if os.path.exists(output_video_file_path):
                 print("video exists")
                 return jsonify({'filePath': output_video_file_path})
-            
-
-            
-                
+             
             else:
                 cap = cv2.VideoCapture(video_file_path)
 
