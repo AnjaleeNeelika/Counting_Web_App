@@ -40,7 +40,7 @@ const VideoUploader = ({ onVideoUpload }) => {
     const [video, setVideo] = useState(null);
     const [id, setId] = useState(null);
     const [fileName, setFileName] = useState("No file selected");
-    const [uploadMsg, setUploadMsg] = useState(''); 
+    const [uploadMsg, setUploadMsg] = useState('');
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
@@ -78,7 +78,7 @@ const VideoUploader = ({ onVideoUpload }) => {
             <form onSubmit={handleSubmit} className='w-full'>
                 <input
                     type="file"
-                    accept='video/mp4, video/mov'
+                    accept='video/mp4, video/quicktime'
                     className='input-field'
                     hidden
                     onChange={handleFileChange}
@@ -90,6 +90,7 @@ const VideoUploader = ({ onVideoUpload }) => {
                     {video ?
                         <video className='h-full w-full' controls autoPlay loop>
                             <source src={video} type='video/mp4' />
+                            <source src={video} type='video/quicktime' />
                         </video>
                         :
                         <>

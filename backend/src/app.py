@@ -11,6 +11,7 @@ from blueprints.number_of_action import number_of_action_bp
 from blueprints.get_angles import get_angles_bp
 from blueprints.input_point import input_point_bp
 from blueprints.get_points import get_points_bp
+from blueprints.save_angles_db import  save_angles_db_bp
 
 
 app = Flask(__name__)
@@ -31,6 +32,7 @@ app.register_blueprint(number_of_action_bp)
 app.register_blueprint(get_angles_bp)
 app.register_blueprint(get_points_bp)
 app.register_blueprint(input_point_bp)
+app.register_blueprint(save_angles_db_bp)
 
 
 if __name__ == "__main__":

@@ -42,6 +42,7 @@ const Angles = () => {
         fetchVideoDetails();
     }, []);
 
+
     return (
         <div className='w-full h-full overflow-auto p-6 md:p-10 flex flex-wrap justify-center items-center gap-10'>
             <div className='bg-slate-300 w-full md:w-[50vw] h-fit max-h-[60vh]'>
@@ -72,7 +73,7 @@ const Angles = () => {
                         {[...Array(Number(no_of_actions))].map((_, index) => (
                             <tr key={index}>
                                 <td className='text-left'>
-                                    <h3 className='text-[#b0578d] text-sm md:text-base font-medium'>Action 1</h3>
+                                    <h3 className='text-[#b0578d] text-sm md:text-base font-medium'>Action {index + 1}</h3>
                                 </td>
                                 <td>
                                     <input type="text" name="" id="" disabled className='border w-20 md:w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
@@ -86,36 +87,6 @@ const Angles = () => {
                                 </td>
                             </tr>
                         ))}
-                        {/* <tr>
-                            <td className='text-left'>
-                                <h3 className='text-[#b0578d] text-sm md:text-base font-medium'>Action 2</h3>
-                            </td>
-                            <td>
-                                <input type="text" name="" id="" disabled className='border w-20 md:w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
-                            </td>
-                            <td className='flex my-1'>
-                                <input type="number" max={100} min={1} name="" id="" className='border w-20 md:w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
-                                <button className='bg-[#b0578d] text-white text-xs px-2 ml-2 rounded-full hover:bg-[#974b79]'>Apply</button>
-                            </td>
-                            <td>
-                                <input type="text" name="" id="" disabled className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
-                            </td>
-                        </tr> */}
-                        {/* <tr>
-                            <td className='text-left'>
-                                <h3 className='text-[#b0578d] text-sm md:text-base font-medium'>Action 3</h3>
-                            </td>
-                            <td>
-                                <input type="text" name="" id="" disabled className='border w-20 md:w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
-                            </td>
-                            <td className='flex my-1'>
-                                <input type="number" max={100} min={1} name="" id="" className='border w-20 md:w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
-                                <button className='bg-[#b0578d] text-white text-xs px-2 ml-2 rounded-full hover:bg-[#974b79] hover:-translate-y-0.5'>Apply</button>
-                            </td>
-                            <td>
-                                <input type="text" name="" id="" disabled className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
-                            </td>
-                        </tr> */}
                     </tbody>
                 </table>
 
@@ -135,7 +106,7 @@ const Angles = () => {
                         {[...Array(Number(no_of_actions))].map((_, index) => (
                             <tr key={index}>
                                 <td>
-                                    <h3 className='text-[#b0578d] text-base font-medium'>Action 1</h3>
+                                    <h3 className='text-[#b0578d] text-base font-medium'>Action {index + 1}</h3>
                                 </td>
                                 <td>
                                     <input type="number" max={180} min={1} name="" id="" className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
