@@ -6,6 +6,7 @@ import cv2
 from cvzone.PoseModule import PoseDetector
 
 from flask import send_file 
+import subprocess 
 
 
 
@@ -51,11 +52,20 @@ def get_video_details(video_id):
                 frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
                 frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
                 fps = int(cap.get(cv2.CAP_PROP_FPS))
-                codec = int(cap.get(cv2.CAP_PROP_FOURCC))  # encoding video frame
-                # codec = cv2.VideoWriter_fourcc(*'mp4')
-                out = cv2.VideoWriter(output_video_file_path, codec, fps, (frame_width, frame_height))
+                codec = 'libx264'
+                print(codec)
+                # out = cv2.VideoWriter(output_video_file_path, codec, fps, (frame_width, frame_height))
+                # out = cv2.VideoWriter(output_video_file_path, cv2.VideoWriter_fourcc(*'mp4v'), fps, (frame_width, frame_height))
+                output_command = ['ffmpeg', '-y', '-f', 'rawvideo', '-vcodec', 'rawvideo', '-s', f'{frame_width}x{frame_height}', '-pix_fmt', 'bgr24', '-r', f'{fps}', '-i', '-', '-c:v', f'{codec}', output_video_file_path]
+                # process = subprocess.Popen(output_command.split(), stdin=subprocess.PIPE)
+
+                try:
+                    process = subprocess.Popen(' '.join(output_command), stdin=subprocess.PIPE, shell=True)
+                except Exception as e:
+                    print(f"Error executing command: {e}")
 
                 total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+                print(total_frames)
                 current_frame = 0
 
                 while current_frame < total_frames:
@@ -76,12 +86,13 @@ def get_video_details(video_id):
                             cv2.putText(frame, str(idx), (int(x), int(y)), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 255, 0), 2, cv2.LINE_AA)
 
 
-                    out.write(frame)
+                    process.stdin.write(frame.tobytes())
 
                     current_frame += 1
 
+                process.stdin.close()
+                process.wait()
                 cap.release()
-                out.release()
 
                 print("save as sample video")
                 return jsonify({'filePath': output_video_file_path})

@@ -6,6 +6,7 @@ import cv2
 from cvzone.PoseModule import PoseDetector
 
 from flask import send_file 
+import subprocess  
 
 
 
@@ -96,11 +97,18 @@ def get_video_details(video_id):
                 frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
                 frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
                 fps = int(cap.get(cv2.CAP_PROP_FPS))
-                codec = int(cap.get(cv2.CAP_PROP_FOURCC))  # encoding video frame
+                codec = 'libx264'
                 print(codec)
-                out = cv2.VideoWriter(output_video_file_path, codec, fps, (frame_width, frame_height))
+                output_command = ['ffmpeg', '-y', '-f', 'rawvideo', '-vcodec', 'rawvideo', '-s', f'{frame_width}x{frame_height}', '-pix_fmt', 'bgr24', '-r', f'{fps}', '-i', '-', '-c:v', f'{codec}', output_video_file_path]
+               
+
+                try:
+                    process = subprocess.Popen(' '.join(output_command), stdin=subprocess.PIPE, shell=True)
+                except Exception as e:
+                    print(f"Error executing command: {e}")
 
                 total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+                print(total_frames)
                 current_frame = 0
 
                 while current_frame < total_frames:
@@ -128,36 +136,13 @@ def get_video_details(video_id):
                                cv2.line(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 3)  # Draw line between consecutive landmarks
 
 
-                        # action1_landmarks = [lmList[i] for i in [12, 14, 16]]
-                        # action2_landmarks = [lmList[i] for i in [11, 13, 15,]]
-
-                        # mid1_x = int(action1_landmarks[1][0])
-                        # mid1_y = int(action1_landmarks[1][1])
-
-                        # cv2.circle(frame, (mid1_x, mid1_y), 5, (0, 0, 255), cv2.FILLED) 
-
-                        # mid2_x = int(action2_landmarks[1][0])
-                        # mid2_y = int(action2_landmarks[1][1])
-                        
-                        # cv2.circle(frame, (mid2_x, mid2_y), 5, (0, 0, 255), cv2.FILLED)
-
-                        # for i in range(len(action1_landmarks) - 1):
-                        #     x1, y1 = action1_landmarks[i][:2]
-                        #     x2, y2 = action1_landmarks[i + 1][:2]
-                        #     cv2.line(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 3)  # Draw line between consecutive landmarks
-
-                        # for i in range(len(action2_landmarks) - 1):
-                        #     x1, y1 = action2_landmarks[i][:2]
-                        #     x2, y2 = action2_landmarks[i + 1][:2]
-                        #     cv2.line(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 3)  # Draw line between consecutive landmarks
-
-
-                    out.write(frame)
+                    process.stdin.write(frame.tobytes())
 
                     current_frame += 1
 
+                process.stdin.close()
+                process.wait()
                 cap.release()
-                out.release()
 
                 print("save as sample video")
                 return jsonify({'filePath': output_video_file_path})
