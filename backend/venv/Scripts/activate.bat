@@ -1,4 +1,4 @@
-@set "VIRTUAL_ENV=E:\UCSC\3rdYear\UCSC_Internship\SystemDevelopment\Counting_Web_App\backend\venv"
+@set "VIRTUAL_ENV=E:\UCSC\Counting_Web_App\backend\venv"
 
 @set "VIRTUAL_ENV_PROMPT="
 @if NOT DEFINED VIRTUAL_ENV_PROMPT (
