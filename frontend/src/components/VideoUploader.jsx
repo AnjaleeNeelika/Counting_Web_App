@@ -41,7 +41,7 @@ const VideoUploader = ({ onVideoUpload }) => {
     const [video, setVideo] = useState(null);
     const [id, setId] = useState(null);
     const [fileName, setFileName] = useState("No file selected");
-    const [uploadMsg, setUploadMsg] = useState(''); 
+    const [uploadMsg, setUploadMsg] = useState('');
     const [msgType, setMsgType] = useState('');
 
     const handleFileChange = (event) => {
@@ -81,7 +81,7 @@ const VideoUploader = ({ onVideoUpload }) => {
 
     return (
         <div className='w-full'>
-            {uploadMsg && 
+            {uploadMsg &&
                 <div>
                     <MessageBox type={msgType} message={uploadMsg} />
                 </div>
@@ -89,7 +89,7 @@ const VideoUploader = ({ onVideoUpload }) => {
             <form onSubmit={handleSubmit} className='w-full'>
                 <input
                     type="file"
-                    accept='video/mp4, video/mov'
+                    accept='video/mp4, video/quicktime'
                     className='input-field'
                     hidden
                     onChange={handleFileChange}
@@ -101,6 +101,7 @@ const VideoUploader = ({ onVideoUpload }) => {
                     {video ?
                         <video className='h-full w-full' controls autoPlay loop muted>
                             <source src={video} type='video/mp4' />
+                            <source src={video} type='video/quicktime' />
                         </video>
                         :
                         <>
@@ -124,7 +125,7 @@ const VideoUploader = ({ onVideoUpload }) => {
                             />
                         </span>
                     </div>
-                    
+
                     <button type="submit" className=''>Upload</button>
                 </section>
             </form>

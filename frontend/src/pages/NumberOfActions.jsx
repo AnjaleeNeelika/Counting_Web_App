@@ -1,70 +1,67 @@
-import { React, useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { AiOutlineExclamationCircle } from 'react-icons/ai';
+
 
 const BASE_URL = 'http://localhost:5000';
 
+// Define checkCodec function outside of the component
+const checkCodec = (videoSrc) => {
+    const video = document.createElement('video');
+
+    video.oncanplay = () => {
+        console.log('Codec supported');
+    };
+
+    video.onerror = () => {
+        console.error('Codec not supported');
+    };
+
+    video.src = videoSrc;
+};
+
 const NumberOfActions = () => {
     const location = useLocation();
-    const currentLocation = location.pathname;
     const navigate = useNavigate();
-    const searchParams = new URLSearchParams(location.search);
-    const videoPath = searchParams.get('videoPath');
-    console.log(videoPath);
-
-    const [videoSrc, setVideoSrc] = useState(null);
-    const [error, setError] = useState(null);
-    const [fileName, setFileName] = useState(null);
-    const [videoId, setVideoId] = useState(null);
+    const [fileName, setFileName] = useState('');
+    const [videoId, setVideoId] = useState('');
     const [numberOfSteps, setNumberOfSteps] = useState('');
 
     useEffect(() => {
         const fetchVideoDetails = async () => {
             try {
-                const currentURL = window.location.href;
-                const cparts = currentURL.split('/');
-                const id = cparts[cparts.length - 1];
-
+                const id = location.pathname.split('/').pop();
                 const response = await axios.get(`${BASE_URL}/videos/view-fulldetect/${id}`);
-                const filePath = response.data.filePath;
+                const { filePath } = response.data;
                 const parts = filePath.split('/');
-                const fileName = parts.pop();
-
-                setFileName(fileName);
-                console.log(fileName)
-                setVideoSrc(filePath);
+                const name = parts.pop();
+                setFileName(name);
                 setVideoId(id);
+
+                // Call checkCodec function after setting fileName
+                checkCodec(`/videos/fulldetect_videos/${name}`);
             } catch (error) {
-                setError(error.message);
                 console.error('Error loading video:', error);
             }
         };
 
         fetchVideoDetails();
-    }, []);
-
-
+    }, [location.pathname]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Number of Steps:", numberOfSteps); // Log the number of steps
-        console.log("Video ID:", videoId); // Log the video ID
         try {
             await axios.post(`${BASE_URL}/number_of_action`, {
                 _id: videoId,
                 number_of_steps: numberOfSteps
             });
-            console.log("Request sent successfully!"); // Log success
+            console.log("Request sent successfully!");
             navigate(`/video-input-type/no-of-actions/input-points/${videoId}/${numberOfSteps}`);
         } catch (error) {
             console.error('Error posting number of actions:', error);
-            // Handle error
         }
     };
-
-
-
 
     return (
         <div className='w-full h-full overflow-auto p-6 md:p-10 flex flex-wrap justify-center items-center gap-10'>
@@ -73,46 +70,33 @@ const NumberOfActions = () => {
                     <h2 className='mx-auto text-center w-fit text-[#8a5374]'>Count the Number of Steps Per One Action</h2>
                     <div className='w-fit mx-auto flex flex-wrap justify-center items-center mt-3 mb-8'>
                         <span className='text-sm mr-0 md:mr-5 mb-2 md:mb-0'>Enter the number of steps</span>
-                        <div>
-                            <input
-                                type="text"
-                                name="numberOfSteps"
-                                id="numberOfSteps"
-                                value={numberOfSteps}
-                                onChange={(e) => setNumberOfSteps(e.target.value)}
-                                className='text-sm border-2 border-[#ddd] hover:border-[#b89ead] focus:border-[#b89ead] outline-none px-4 py-2 rounded'
-                            />
-                        </div>
-                        
+                        <input
+                            type="text"
+                            name="numberOfSteps"
+                            id="numberOfSteps"
+                            value={numberOfSteps}
+                            onChange={(e) => setNumberOfSteps(e.target.value)}
+                            className='text-sm border-2 border-[#ddd] hover:border-[#b89ead] focus:border-[#b89ead] outline-none px-4 py-2 rounded'
+                        />
                     </div>
                     <button type="submit" className='w-fit mx-auto bg-[#643843] text-sm text-white px-5 py-2 rounded-lg shadow-lg hover:bg-[#75515a] cursor-pointer'>Enter</button>
-                    {/* <Button1 type="submit">Enter</Button1> */}
                 </form>
 
                 <div className='bg-slate-300 lg:w-[900px] w-full max-h-[500px] h-fit mx-auto mt-5 shadow-md'>
-                    {/* to show not found error */}
-                    {/* {fileName ? (
-                        <video className="w-full" autoPlay loop controls muted>
-                            <source src={`/videos/fulldetect_videos/${fileName}`} type="video/mp4" />
-                        </video>
-                    ) : (
-                        <div className='w-full h-[400px] flex justify-center items-center bg-gray-800 text-white text-2xl p-10'>
-                            <div className='text-semibold flex justify-between items-center gap-2'>
-                                <AiOutlineExclamationCircle className='text-4xl' />
-                                Video Unavailable
-                            </div>                            
-                        </div>
-                    )} */}
-
                     {fileName && (
                         <video className="w-full" autoPlay loop controls muted>
                             <source src={`/videos/fulldetect_videos/${fileName}`} type="video/mp4" />
                         </video>
+
                     )}
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default NumberOfActions
+export default NumberOfActions;
+
+
+
+
