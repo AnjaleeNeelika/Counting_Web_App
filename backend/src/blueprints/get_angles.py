@@ -25,10 +25,8 @@ def get_video_details(video_id):
     if videos is None:
         return jsonify({'error': 'Videos collection not found'}), 500
     try:
-        # Convert video_id string to ObjectId
         video_object_id = ObjectId(video_id)
 
-        # Find the video document based on the ObjectId
         video_document = videos.find_one({'_id': video_object_id})
 
         if video_document:
@@ -37,7 +35,6 @@ def get_video_details(video_id):
             number_of_actions = video_document.get('number_of_actions')
             input_points = video_document.get('input_points')
 
-            # Replace point numbers to mediapipe numbers
             replacement_map = {'0': 11, '1': 12, '2': 13, '3': 14, '4': 15, '5': 16, '6': 23, '7': 24, '8': 25, '9': 26}
 
             for point in input_points:
