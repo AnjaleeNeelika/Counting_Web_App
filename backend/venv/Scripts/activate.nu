@@ -32,7 +32,7 @@ export-env {
       }
     }
 
-    let virtual_env = 'E:\UCSC\Counting_Web_App\backend\venv'
+    let virtual_env = 'E:\UCSC\3rdYear\UCSC_Internship\SystemDevelopment\Counting_Web_App\backend\venv'
     let bin = 'Scripts'
 
     let is_windows = ($nu.os-info.family) == 'windows'
