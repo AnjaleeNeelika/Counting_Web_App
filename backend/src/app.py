@@ -14,6 +14,7 @@ from blueprints.input_point import input_point_bp
 from blueprints.get_points import get_points_bp
 from blueprints.token import api
 from blueprints.save_angles_db import  save_angles_db_bp
+from blueprints.display_count import  display_count_bp
 
 
 app = Flask(__name__)
@@ -38,6 +39,7 @@ app.register_blueprint(get_angles_bp)
 app.register_blueprint(get_points_bp)
 app.register_blueprint(input_point_bp)
 app.register_blueprint(save_angles_db_bp)
+app.register_blueprint(display_count_bp)
 app.register_blueprint(api)
 
 
