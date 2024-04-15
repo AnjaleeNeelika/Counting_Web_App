@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import InputText from '../components/InputText';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -12,11 +13,6 @@ const Signup = () => {
         confirm_password: '',
     });
 
-    const onChange = (e) => {
-        setValues({...values, [e.target.name]: e.target.value})
-    }
-    console.log(values);
-
     const [errorMsg, setErrorMsg] = useState({
         name: '',
         email: '',
@@ -24,15 +20,13 @@ const Signup = () => {
         confirm_password: '',
     });
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const onChange = (e) => {
+        setValues({...values, [e.target.name]: e.target.value})
+    }
+    console.log(values);
 
-        setErrorMsg({
-            name: '',
-            email: '',
-            password: '',
-            confirm_password: '',
-        });
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
         if(values.name === '') {
             setErrorMsg(prevState => ({...prevState, name: "Please enter your full name"}));
@@ -49,6 +43,32 @@ const Signup = () => {
 
         if(values.password !== '' && values.confirm_password !== '' && values.password !== values.confirm_password) {
             setErrorMsg(prevState => ({...prevState, confirm_password: "Passwords don't match. Try again."}))
+        }
+
+        const requestData = {
+            name: values.name,
+            email: values.email,
+            password: values.password,
+        };
+
+        try {
+            const response = await axios.post('http://localhost:5000/signup', requestData);
+            console.log(response.data);
+
+            setValues({
+                name: '',
+                email: '',
+                password: '',
+                confirm_password: '',
+            });
+            setErrorMsg({
+                name: '',
+                email: '',
+                password: '',
+                confirm_password: '',
+            });
+        } catch (error) {
+            console.error('Signup error:', error);
         }
     }
 
