@@ -44,6 +44,7 @@ def get_display_count(video_id):
 
         else:
             return jsonify({'error':'video not found'}), 400
+        
 
     except Exception as  e:
         return jsonify({'error': str(e)}), 500
