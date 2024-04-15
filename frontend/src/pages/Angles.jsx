@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from 'react';
 import Button1 from '../components/Button1';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const BASE_URL = 'http://localhost:5000';
@@ -14,6 +14,9 @@ const Angles = () => {
     const [videoId, setVideoId] = useState(null);
     const [numberOfSteps, setNumberOfSteps] = useState('');
     const [no_of_actions, setNoOfActions] = useState(null);
+    const [formData, setFormData] = useState([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchVideoDetails = async () => {
@@ -41,6 +44,39 @@ const Angles = () => {
 
         fetchVideoDetails();
     }, []);
+
+
+    const handleInputChange = (index, field, value) => {
+        setFormData(prevData => {
+            const newData = [...prevData];
+            if (index >= newData.length) {
+                for (let i = newData.length; i <= index; i++) {
+                    newData.push({ start: '', end: '' });
+                }
+            }
+            newData[index] = { ...newData[index], [field]: value };
+            return newData;
+        });
+    }
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log("Form Data", formData);
+        try {
+            await axios.post(`${BASE_URL}/save_angles_db`, {
+                _id: videoId,
+                angles: formData
+            });
+            alert("Angles saved successfully");
+            navigate(`/video-input-type/show-count`)
+        } catch (error) {
+            console.error("Error posting angles values", error)
+        }
+    };
+
+
+
 
     return (
         <div className='w-full h-full overflow-auto p-6 md:p-10 flex flex-wrap justify-center items-center gap-10'>
@@ -112,10 +148,20 @@ const Angles = () => {
                                     <h3 className='text-[#b0578d] text-base font-medium'>Action {index + 1}</h3>
                                 </td>
                                 <td>
-                                    <input type="number" max={180} min={1} name="" id="" className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
+                                    {/* <input type="number" max={180} min={1} name="" id="" className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' /> */}
+                                    <input
+                                        type='number'
+                                        className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]'
+                                        onChange={(e) => handleInputChange(index, 'start', e.target.value)}
+                                    />
                                 </td>
                                 <td>
-                                    <input type="number" max={180} min={1} name="" id="" className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' />
+                                    {/* <input type="number" max={180} min={1} name="" id="" className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]' /> */}
+                                    <input
+                                        type='number'
+                                        className='border w-24 px-3 py-2 rounded text-xs hover:border-[#ca95b5] outline-none focus:border-[#b97ca1]'
+                                        onChange={(e) => handleInputChange(index, 'end', e.target.value)}
+                                    />
                                 </td>
                             </tr>
                         ))}
@@ -123,9 +169,11 @@ const Angles = () => {
                 </table>
 
                 <div className='mt-8'>
-                    <Link to={{ pathname: '/video-input-type/show-count' }}>
+                    {/* <Link to={{ pathname: '/video-input-type/show-count' }}>
                         <Button1>Continue</Button1>
-                    </Link>
+                    </Link> */}
+
+                    <button onClick={handleSubmit} type='submit' className='w-fit mx-auto bg-[#643843] text-sm text-white px-5 py-2 rounded-lg shadow-lg hover:bg-[#75515a] cursor-pointer'>Continue</button>
                 </div>
 
             </div>
