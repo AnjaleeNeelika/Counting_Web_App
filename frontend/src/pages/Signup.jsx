@@ -28,62 +28,75 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        setErrorMsg({
+            name: '',
+            email: '',
+            password: '',
+            confirm_password: '',
+        });
+
+        let hasError = false;
+
         if(values.name === '') {
             setErrorMsg(prevState => ({...prevState, name: "Please enter your full name"}));
+            hasError = true;
         }
         if(values.email === '') {
             setErrorMsg(prevState => ({...prevState, email: "Please enter your email"}));
+            hasError = true;
         }
         if(values.password === '') {
-            setErrorMsg(prevState => ({...prevState, password: "Please enter the password"}))
+            setErrorMsg(prevState => ({...prevState, password: "Please enter the password"}));
+            hasError = true;
         }
         if(values.confirm_password === '') {
-            setErrorMsg(prevState => ({...prevState, confirm_password: "Please re-enter the password"}))
+            setErrorMsg(prevState => ({...prevState, confirm_password: "Please re-enter the password"}));
+            hasError = true;
         }
 
         if(values.password !== '' && values.confirm_password !== '' && values.password !== values.confirm_password) {
-            setErrorMsg(prevState => ({...prevState, confirm_password: "Passwords don't match. Try again."}))
+            setErrorMsg(prevState => ({...prevState, confirm_password: "Passwords don't match. Try again."}));
+            hasError = true;
         }
-
-        const requestData = {
-            name: values.name,
-            email: values.email,
-            password: values.password,
-        };
-
-        try {
-            const response = await axios.post('http://localhost:5000/signup', requestData);
-            console.log(response.data);
-
-            setValues({
-                name: '',
-                email: '',
-                password: '',
-                confirm_password: '',
-            });
-            setErrorMsg({
-                name: '',
-                email: '',
-                password: '',
-                confirm_password: '',
-            });
-        } catch (error) {
-            console.error('Signup error:', error);
+        
+        if (!hasError) {
+            const requestData = {
+                name: values.name,
+                email: values.email,
+                password: values.password,
+            };
+        
+            try {
+                const response = await axios.post('http://localhost:5000/signup', requestData);
+                console.log(response.data);
+    
+                setValues({
+                    name: '',
+                    email: '',
+                    password: '',
+                    confirm_password: '',
+                });
+    
+                navigate('/signup');
+            } catch (error) {
+                console.error('Signup error:', error);
+            }
         }
+        
     }
 
-    useEffect(() => {
-        if(errorMsg.name === '' && errorMsg.email === '' && errorMsg.password === '' && errorMsg.confirm_password === '') {
-            console.log('Success');
-            setValues({
-                name: '',
-                email: '',
-                password: '',
-                confirm_password: '',
-            });
-            navigate('/signup');
-        }
-    }, [errorMsg]);
+    // useEffect(() => {
+    //     if(errorMsg.name === '' && errorMsg.email === '' && errorMsg.password === '' && errorMsg.confirm_password === '') {
+    //         console.log('Success');
+    //         setValues({
+    //             name: '',
+    //             email: '',
+    //             password: '',
+    //             confirm_password: '',
+    //         });
+    //         navigate('/signup');
+    //     }
+    // }, [errorMsg]);
 
     return (
         <div className='w-full h-full p-10 flex items-center justify-center'>
