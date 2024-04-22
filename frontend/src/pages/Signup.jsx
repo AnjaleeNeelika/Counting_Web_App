@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import InputText from '../components/InputText';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import LoginSuccessPopup from '../components/LoginSuccessPopup';
 
 const Signup = () => {
     const navigate = useNavigate();
+    const [popup, setPopup] = useState(false);
 
     const [values, setValues] = useState({
         name: '',
@@ -77,6 +79,7 @@ const Signup = () => {
                     confirm_password: '',
                 });
     
+                setPopup(true);
                 navigate('/signup');
             } catch (error) {
                 console.error('Signup error:', error);
@@ -100,6 +103,7 @@ const Signup = () => {
 
     return (
         <div className='w-full h-full p-10 flex items-center justify-center'>
+            {popup ? <LoginSuccessPopup /> : <></>}
             <div className='bg-white max-w-[400px] w-full rounded-md shadow-md p-10'>
                 <h2 className='text-[#a87c7c] w-fit mx-auto text-center'>Create An Account</h2>
                 <div className='mt-10'>
