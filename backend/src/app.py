@@ -14,6 +14,7 @@ from blueprints.input_point import input_point_bp
 from blueprints.get_points import get_points_bp
 from blueprints.token import api
 from blueprints.signup import signup_bp
+from blueprints.login import login_bp
 
 
 app = Flask(__name__)
@@ -24,12 +25,8 @@ CORS(app)
 
 mongo_uri = os.getenv('MONGO_URI')
 
-
 app.config['MONGO_URI'] = mongo_uri
 mongo = PyMongo(app)
-
-app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET', 'sample key')
-jwt = JWTManager(app)
 
 app.register_blueprint(video_upload_bp)
 app.register_blueprint(view_fulldetect_bp)
@@ -39,16 +36,7 @@ app.register_blueprint(get_points_bp)
 app.register_blueprint(input_point_bp)
 app.register_blueprint(api)
 app.register_blueprint(signup_bp)
-
+app.register_blueprint(login_bp)
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
-
-
-
-
-
-
