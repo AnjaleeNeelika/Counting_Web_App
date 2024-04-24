@@ -11,7 +11,7 @@ const Login = () => {
     const token = sessionStorage.getItem("token");
 
     const [values, setValues] = useState({
-        username: '',
+        email: '',
         password: '',
     });
 
@@ -21,37 +21,69 @@ const Login = () => {
     console.log(values);
 
     const [errorMsg, setErrorMsg] = useState({
-        username: '',
+        email: '',
         password: '',
     });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         setErrorMsg({
-            username: '',
+            email: '',
             password: '',
         });
 
-        if(values.username === '') {
-            setErrorMsg(prevState => ({...prevState, username: 'Please enter the username'}))
+        let hasError = false;
+
+        if(values.email === '') {
+            setErrorMsg(prevState => ({...prevState, email: 'Please enter the username'}));
+            hasError = true;
         } 
 
         if(values.password === '') {
             setErrorMsg(prevState => ({...prevState, password: 'Please enter the password'}))
+            hasError = true;
         }
 
-        try {
-            axios.post(`${BASE_URL}/token`, {
-                email: values['username'],
-                password: values['password'],
-            });
-            sessionStorage.setItem("token", data.access_token);
-            console.log('Success');
-            navigate('/login');
-        } catch (error) {
-            console.error('Error login in', error);
+        if (!hasError) {
+            const requestData = {
+                email: values.email,
+                password: values.password,
+            };
+
+            try {
+                const response = await axios.post('http://localhost:5000/login', requestData);
+                console.log(response.data);
+
+                setValues({
+                    email: '',
+                    password: '',
+                });
+
+                navigate('/home');
+            } catch (error) {
+                if(error.response && error.response.data.error === 'User not found') {
+                    setErrorMsg(prevState => ({...prevState, email: 'User not found'}));
+                }
+                if(error.response && error.response.data.error === 'Incorrect password') {
+                    setErrorMsg(prevState => ({...prevState, password: 'Incorrect password'}));
+                }
+                console.error('Login error: ', error);
+            }
         }
+         
+
+        // try {
+        //     axios.post(`${BASE_URL}/login`, {
+        //         email: values['username'],
+        //         password: values['password'],
+        //     });
+        //     // sessionStorage.setItem("token", data.access_token);
+        //     console.log('Success');
+        //     navigate('/login');
+        // } catch (error) {
+        //     console.error('Error login in', error);
+        // }
     }
 
     // useEffect(() => {
@@ -72,7 +104,7 @@ const Login = () => {
                 <div className='mt-10'>
                     <form action="" method="post">
                         <div className='mt-4'>
-                            <InputText name='username' label='Username' value={values['username']} onChange={onChange} errorMsg={errorMsg['username']} />
+                            <InputText name='email' label='Username' value={values['email']} onChange={onChange} errorMsg={errorMsg['email']} />
                         </div>
                         <div className='mt-5'>
                             <InputText type='password' name='password' label='Password' value={values['password']} onChange={onChange} errorMsg={errorMsg['password']} />

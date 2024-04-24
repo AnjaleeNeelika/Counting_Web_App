@@ -82,6 +82,9 @@ const Signup = () => {
                 setPopup(true);
                 navigate('/signup');
             } catch (error) {
+                if (error.response && error.response.data && error.response.data.error) {
+                    setErrorMsg({ ...errorMsg, email: error.response.data.error });
+                }
                 console.error('Signup error:', error);
             }
         }

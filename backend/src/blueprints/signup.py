@@ -16,6 +16,11 @@ def user_signup():
     email = data.get('email')
     password = data.get('password')
 
+    # check if the email already exist in the database
+    existing_user = users.find_one({'email': email})
+    if existing_user:
+        return jsonify({'error': 'Email already exists'}), 400
+
     # hash the password
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
