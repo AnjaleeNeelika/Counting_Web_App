@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Reports from './pages/Reports';
@@ -14,17 +14,43 @@ import DownloadedVideos from './pages/DownloadedVideos';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ResetPassword from './pages/ResetPassword';
+import Logout from './pages/Logout';
+import LogoutConfirmPopup from './components/LogoutConfirmPopup';
 
 const App = () => {
+    const [showLogoutPopup, setShowLogoutPopup] = useState(false);
+    const [authenticated, setAuthenticated] = useState(!!sessionStorage.getItem('token'));
+
+    const handleLogout = () => {
+        setShowLogoutPopup(true);
+    }
+
+    const confirmLogout = () => {
+        sessionStorage.removeItem('token');
+        setAuthenticated(false);
+        setShowLogoutPopup(false);
+    }
+
+    const cancelLogout = () => {
+        setShowLogoutPopup(false);
+    }
+
     return (
         <div className='w-full h-screen bg-[#f8f4ec]'>
-            <Navbar />
+            <Navbar handleLogout={handleLogout} authenticated={authenticated} setAuthenticated={setAuthenticated} />
             <div className='w-full h-[calc(100vh-5rem)] overflow-auto z-0'>
+                {showLogoutPopup && (
+                    <LogoutConfirmPopup
+                        confirmLogout={confirmLogout}
+                        cancelLogout={cancelLogout}
+                    />
+                )}
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/home' element={<Home />} />
                     <Route path='/reports' element={<Reports />} />
                     <Route path='/login' element={<Login />} />
+                    <Route path='/logout' element={<Logout />} />
                     <Route path='/signup' element={<Signup />} />
                     <Route path='/reset-password' element={<ResetPassword />} />
                     <Route path='/video-input-type' element={<VideoInputType />} />

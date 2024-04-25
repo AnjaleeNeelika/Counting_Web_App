@@ -60,6 +60,9 @@ const Login = () => {
                     password: '',
                 });
 
+                sessionStorage.setItem('token', response.data.access_token);
+                // console.log(sessionStorage.getItem('token'));
+
                 navigate('/home');
             } catch (error) {
                 if(error.response && error.response.data.error === 'User not found') {

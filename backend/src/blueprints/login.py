@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, session
 from flask_bcrypt import Bcrypt
+from flask_jwt_extended import create_access_token
 
 login_bp = Blueprint('login_bp', __name__)
 logout_bp = Blueprint('logout_bp', __name__)
@@ -16,15 +17,17 @@ def login():
     password = data.get('password')
 
     user = users.find_one({'email': email})
-    print(user)
 
     if user is None:  
         return jsonify({'error': 'User not found'}), 401   
 
     if not bcrypt.check_password_hash(user['password'], password):
         return jsonify({'error': 'Incorrect password'}), 401
-        
-    return jsonify({'message': 'User logged in successfully'}), 201
+    
+    # Generate JWT token
+    access_token = create_access_token(identity=str(user['_id'])) 
+
+    return jsonify({'access_token': access_token}), 201
 
 
 @logout_bp.route('/logout', methods=['POST'])
