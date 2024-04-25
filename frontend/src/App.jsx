@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Reports from './pages/Reports';
 import VideoInputType from './pages/VideoInputType';
@@ -20,6 +20,7 @@ import LogoutConfirmPopup from './components/LogoutConfirmPopup';
 const App = () => {
     const [showLogoutPopup, setShowLogoutPopup] = useState(false);
     const [authenticated, setAuthenticated] = useState(!!sessionStorage.getItem('token'));
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         setShowLogoutPopup(true);
@@ -29,6 +30,7 @@ const App = () => {
         sessionStorage.removeItem('token');
         setAuthenticated(false);
         setShowLogoutPopup(false);
+        navigate('/home');
     }
 
     const cancelLogout = () => {
