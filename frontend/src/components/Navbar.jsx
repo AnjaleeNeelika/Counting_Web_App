@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 
-const Navbar = () => {
+const Navbar = ({ handleLogout, authenticated, setAuthenticated }) => {
     const [open, setOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isActive, setIsActive] = useState('home');
@@ -10,25 +10,33 @@ const Navbar = () => {
     const location = useLocation();
 
     useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 0) {
-                setIsScrolled(true);
-            } else {
-                setIsScrolled(false);
-            }
-        };
+        // const handleScroll = () => {
+        //     if (window.scrollY > 0) {
+        //         setIsScrolled(true);
+        //     } else {
+        //         setIsScrolled(false);
+        //     }
+        // };
 
-        window.addEventListener('scroll', handleScroll);
+        // window.addEventListener('scroll', handleScroll);
 
-        const currentPath = location.pathname.split('/')[1];
-        handleActiveLink(currentPath);
+        // const currentPath = location.pathname.split('/')[1];
+        // handleActiveLink(currentPath);
 
-        return () => window.removeEventListener('scroll', handleScroll);
+        // return () => window.removeEventListener('scroll', handleScroll);
+
+        const token = sessionStorage.getItem('token');
+        setAuthenticated(!!token);
     }, [location]);
 
     const handleActiveLink = (link) => {
         setIsActive(link);
     }
+
+    // const handleLogout = () => {
+    //     sessionStorage.removeItem('token');
+    //     setAuthenticated(false);
+    // }
 
     return (
         <div>
@@ -48,9 +56,13 @@ const Navbar = () => {
                             <Link to='/video-input-type' onClick={() => handleActiveLink('video-input-type')}>Start Counting</Link>
                         </li>
                         <li>
-                            <Link to='/login'>
-                                <button className='bg-[#a87c7c] text-white px-4 py-2 text-sm rounded-full hover:bg-[#997171] hover:-translate-y-1 duration-500 transform shadow-[0_3px_10px_rgb(0,0,0,0.2)] shadow-[#694e4e]'>Login</button>
-                            </Link>
+                            {authenticated ? (
+                                <button onClick={handleLogout} className='bg-[#a87c7c] text-white px-4 py-2 text-sm rounded-full hover:bg-[#997171] hover:-translate-y-1 duration-500 transform shadow-[0_3px_10px_rgb(0,0,0,0.2)] shadow-[#694e4e]'>Logout</button>
+                            ) : (
+                                <Link to='/login'>
+                                    <button className='bg-[#a87c7c] text-white px-4 py-2 text-sm rounded-full hover:bg-[#997171] hover:-translate-y-1 duration-500 transform shadow-[0_3px_10px_rgb(0,0,0,0.2)] shadow-[#694e4e]'>Login</button>
+                                </Link>
+                            )}
                         </li>
                     </ul>
                 </div>

@@ -168,7 +168,7 @@ const Angles = () => {
                     </tbody>
                 </table>
 
-                <div className='mt-8'>
+                <div className='mt-8 flex justify-center items-center'>
                     {/* <Link to={{ pathname: '/video-input-type/show-count' }}>
                         <Button1>Continue</Button1>
                     </Link> */}

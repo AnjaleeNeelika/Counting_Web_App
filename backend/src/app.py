@@ -28,6 +28,11 @@ mongo_uri = os.getenv('MONGO_URI')
 app.config['MONGO_URI'] = mongo_uri
 mongo = PyMongo(app)
 
+secret_key = os.getenv('JWT_SECRET')
+
+app.config['JWT_SECRET_KEY'] = secret_key
+jwt = JWTManager(app)
+
 app.register_blueprint(video_upload_bp)
 app.register_blueprint(view_fulldetect_bp)
 app.register_blueprint(number_of_action_bp)
