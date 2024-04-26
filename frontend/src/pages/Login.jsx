@@ -3,12 +3,14 @@ import InputText from '../components/InputText';
 import { Link, redirect, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { data } from 'autoprefixer';
+import LoadingPopup from '../components/LoadingPopup';
 
 const BASE_URL = 'http://localhost:5000';
 
 const Login = () => {
     const navigate = useNavigate();
     const token = sessionStorage.getItem("token");
+    const [loading, setLoading] = useState(false);
 
     const [values, setValues] = useState({
         email: '',
@@ -27,6 +29,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         setErrorMsg({
             email: '',
@@ -73,6 +76,7 @@ const Login = () => {
                 }
                 console.error('Login error: ', error);
             }
+            setLoading(false);
         }
          
 
@@ -102,6 +106,11 @@ const Login = () => {
 
     return (
         <div className='w-full h-full p-10 flex items-center justify-center'>
+            {loading ? (
+                <LoadingPopup message='Logging In...' />
+            ) : (
+                <></>
+            )}
             <div className='bg-white max-w-[400px] w-full p-10 rounded-md shadow-md'>
                 <h1 className='w-fit text-[#a87c7c] mx-auto'>Welcome Back!</h1>
                 <div className='mt-10'>

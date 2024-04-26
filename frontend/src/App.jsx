@@ -16,6 +16,7 @@ import Signup from './pages/Signup';
 import ResetPassword from './pages/ResetPassword';
 import Logout from './pages/Logout';
 import LogoutConfirmPopup from './components/LogoutConfirmPopup';
+import LoadingPopup from './components/LoadingPopup';
 
 const App = () => {
     const [showLogoutPopup, setShowLogoutPopup] = useState(false);
