@@ -18,9 +18,17 @@ const ShowCount = () => {
     });
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setSeconds(prevSeconds => prevSeconds + 1);
-        }, 1000);
+        // const interval = setInterval(() => {
+        //     setSeconds(prevSeconds => prevSeconds + 1);
+        // }, 1000);
+
+        // return () => clearInterval(interval);
+        let interval;
+        if (!isPaused && !isStopped) {
+            interval = setInterval(() => {
+                setSeconds(prevSeconds => prevSeconds + 1);
+            }, 1000);
+        }
 
         return () => clearInterval(interval);
     })
