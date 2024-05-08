@@ -86,7 +86,7 @@ const VideoUploader = ({ onVideoUpload }) => {
                     <MessageBox type={msgType} message={uploadMsg} />
                 </div>
             }
-            <form onSubmit={handleSubmit} className='w-full'>
+            <form className='w-full'>
                 <input
                     type="file"
                     accept='video/mp4, video/quicktime'
@@ -126,7 +126,7 @@ const VideoUploader = ({ onVideoUpload }) => {
                         </span>
                     </div>
 
-                    <button type="submit" className=''>Upload</button>
+                    <button className='' onClick={handleSubmit}>Upload</button>
                 </section>
             </form>
         </div>
