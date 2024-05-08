@@ -10,6 +10,7 @@ const UploadVideo = () => {
 
     const [videoId, setVideoId] = useState(null);
     const [uploadError, setUploadError] = useState('');
+    console.log(videoId)
 
     const handleUploadSuccess = (uploadedId) => {
         setVideoId(uploadedId);
@@ -17,8 +18,10 @@ const UploadVideo = () => {
     };
 
     const handleUploadClick = () => {
+        console.log()
         if (!videoId) {
             setUploadError('Please upload a video before continuing');
+            
         } else {
             setUploadError('');
         }
@@ -29,15 +32,15 @@ const UploadVideo = () => {
             <h1 className=''>Upload Your Video</h1>
             <div className='w-full h-[calc(100%-3rem)] flex justify-center items-center md:mt-0 mt-5'>
                 <div>
-                    {uploadError &&
+                    {uploadError && !videoId &&
                         <div className='mb-10'>
                             <MessageBox type='warning' message={uploadError} />
                         </div>
                     }
                     <div className='w-full md:w-fit mx-auto bg-white p-5 rounded-lg shadow-lg'>
                         <VideoUploader onVideoUpload={handleUploadSuccess} />
-                        <form onSubmit={handleUploadClick} className='mt-5'>
-                            {uploadError === '' ? (
+                        <form className='mt-5'>
+                            {uploadError === '' && videoId ? (
                                 <Link
                                     to={`/video-input-type/no-of-actions/${videoId}`}
                                 >
