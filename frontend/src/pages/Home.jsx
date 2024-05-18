@@ -88,7 +88,7 @@ const Home = () => {
                 </div>                              
             </div>
 
-            <div className='w-full bg-[#22171f] p-10 flex justify-between items-center'>
+            <div className='w-full bg-[#22171f] p-10 flex justify-evenly items-center'>
                 <div>
                     <div className='text-white text-3xl font-semibold'>Contact Us</div>
                     <div className='mt-10 pl-10'>
@@ -107,8 +107,27 @@ const Home = () => {
                     </div>
                 </div>    
                 <div>
-                    <div className='text-white text-3xl font-semibold'>Write to us</div>
-                    
+                    <div className='text-white text-3xl font-semibold'>Write to Us</div>
+                    <div className='mt-5'>
+                        <div className='flex gap-6'>
+                            <div className='w-fit flex flex-col'>
+                                <label htmlFor="first-name" className='text-xs text-white mb-1'>First Name</label>
+                                <input type='text' className='first-name px-3 py-2 text-xs rounded-sm outline-none' />
+                            </div>
+                            <div className='w-fit flex flex-col'>
+                                <label htmlFor="last-name" className='text-xs text-white mb-1'>Last Name</label>
+                                <input type='text' className='last-name px-3 py-2 text-xs rounded-sm outline-none' />
+                            </div>
+                        </div>
+                        <div className='w-full flex flex-col mt-5'>
+                            <label htmlFor="email" className='text-xs text-white mb-1'>Email</label>
+                            <input type='email' className='email px-3 py-2 text-xs rounded-sm outline-none' />
+                        </div>
+                        <div className='w-full flex flex-col mt-5'>
+                            <label htmlFor="teaxtarea" className='text-xs text-white mb-1'>Note</label>
+                            <textarea className='textarea min-h-20 h-fit px-3 py-2 text-xs rounded-sm outline-none' />
+                        </div>
+                    </div>
                 </div>            
             </div>
         </div>
