@@ -20,7 +20,7 @@ const Login = () => {
     const onChange = (e) => {
         setValues({...values, [e.target.name]: e.target.value})
     }
-    console.log(values);
+    // console.log(values);
 
     const [errorMsg, setErrorMsg] = useState({
         email: '',
@@ -64,7 +64,7 @@ const Login = () => {
                 });
 
                 sessionStorage.setItem('token', response.data.access_token);
-                // console.log(sessionStorage.getItem('token'));
+                console.log(sessionStorage.getItem('token'));
 
                 navigate('/home');
             } catch (error) {

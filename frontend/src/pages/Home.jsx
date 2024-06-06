@@ -18,7 +18,7 @@ const Home = () => {
                 <div className='w-full h-full flex justify-center items-center bg-black bg-opacity-60 p-10'>
                     <div className='mb-10 text-white'>
                         <div className='text-5xl italic font-semibold'>Get the finished product count easily!</div>
-                        <div className='mt-5 w-fit mx-auto text-center'>Now you can get the finished product count of a worker by using their body gestures.</div>
+                        <div className='mt-5 w-fit mx-auto'>Now you can get the finished product count of a worker by using their body gestures.</div>
                         <div className='w-fit mx-auto'>You don't need to walk around the factory counting the products!</div>
                         <div className='w-fit mx-auto mt-10'>
                             <Link 
@@ -44,7 +44,7 @@ const Home = () => {
 
             <div className='w-fit px-10 py-14 mx-auto'>
                 <div className='text-2xl text-[#7e5472] font-semibold italic'>It Offers,</div>
-                <div className='pl-10'>
+                <div className='w-full pl-10'>
                     <div className='flex items-center gap-5 mt-3'>
                         <FiCheckCircle className='text-[#7e5472] text-2xl font-medium' />
                         <span className='text-lg text-[#7e5472]'>Real-time counting of products</span>
@@ -66,7 +66,7 @@ const Home = () => {
 
             <div className='bg-white px-10 py-14 shadow-md'>
                 <div className='text-2xl text-[#7e5472] font-semibold italic mb-5'>Benefits</div>
-                <div className='w-full flex justify-evenly items-center gap-10'>
+                <div className='w-full flex flex-wrap justify-evenly items-center gap-10'>
                     <div className='w-40 h-40 bg-[#8a6d82] p-5 rounded-lg shadow-lg flex items-center justify-center'>
                         <div className='w-fit h-fit'>
                             <img src={SaveTime} className='mx-auto' />
@@ -88,8 +88,8 @@ const Home = () => {
                 </div>                              
             </div>
 
-            <div className='w-full bg-[#22171f] p-10 flex justify-evenly items-center'>
-                <div>
+            <div className='w-full bg-[#22171f] px-10 py-20 flex flex-wrap justify-evenly items-center gap-10'>
+                <div className=''>
                     <div className='text-white text-3xl font-semibold'>Contact Us</div>
                     <div className='mt-10 pl-10'>
                         <div className='text-white flex items-center gap-4'>
@@ -111,21 +111,21 @@ const Home = () => {
                     <div className='mt-5'>
                         <div className='flex gap-6'>
                             <div className='w-fit flex flex-col'>
-                                <label htmlFor="first-name" className='text-xs text-white mb-1'>First Name</label>
-                                <input type='text' className='first-name px-3 py-2 text-xs rounded-sm outline-none' />
+                                <label htmlFor="first-name" className='text-xs text-white mb-1'>First Name*</label>
+                                <input type='text' className='first-name px-3 py-2 text-xs rounded-sm outline-none border-2 hover:border-[#8a6d82]' />
                             </div>
                             <div className='w-fit flex flex-col'>
-                                <label htmlFor="last-name" className='text-xs text-white mb-1'>Last Name</label>
-                                <input type='text' className='last-name px-3 py-2 text-xs rounded-sm outline-none' />
+                                <label htmlFor="last-name" className='text-xs text-white mb-1'>Last Name*</label>
+                                <input type='text' className='last-name px-3 py-2 text-xs rounded-sm outline-none border-2 hover:border-[#8a6d82]' />
                             </div>
                         </div>
                         <div className='w-full flex flex-col mt-5'>
-                            <label htmlFor="email" className='text-xs text-white mb-1'>Email</label>
-                            <input type='email' className='email px-3 py-2 text-xs rounded-sm outline-none' />
+                            <label htmlFor="email" className='text-xs text-white mb-1'>Email*</label>
+                            <input type='email' className='email px-3 py-2 text-xs rounded-sm outline-none border-2 hover:border-[#8a6d82]' />
                         </div>
                         <div className='w-full flex flex-col mt-5'>
-                            <label htmlFor="teaxtarea" className='text-xs text-white mb-1'>Note</label>
-                            <textarea className='textarea min-h-20 h-fit px-3 py-2 text-xs rounded-sm outline-none' />
+                            <label htmlFor="teaxtarea" className='text-xs text-white mb-1'>Note*</label>
+                            <textarea className='textarea min-h-20 h-fit px-3 py-2 text-xs rounded-sm outline-none border-2 hover:border-[#8a6d82]' />
                         </div>
                     </div>
                 </div>            

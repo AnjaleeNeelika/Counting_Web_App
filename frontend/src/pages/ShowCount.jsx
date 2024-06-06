@@ -45,7 +45,7 @@ const ShowCount = () => {
                         </div>
                         <div className='w-36 md:w-56 p-7 bg-[#866078] rounded-md shadow text-white text-center'>
                             <h3 className='mb-3 text-base md:text-lg'>Finished Count</h3>
-                            <div className='text-4xl md:text-5xl'>100</div>
+                            <div className='text-4xl md:text-5xl'>5</div>
                         </div>
                     </div>
                         
