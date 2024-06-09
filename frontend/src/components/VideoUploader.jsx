@@ -8,7 +8,7 @@ import MessageBox from './MessageBox';
 
 const BASE_URL = 'http://localhost:5000';
 
-
+// function for uploading video
 const apiService = {
     uploadVideo: async (file, description) => {
         const formData = new FormData();

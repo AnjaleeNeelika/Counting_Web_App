@@ -1,3 +1,4 @@
+// customized text input field
 import React from 'react'
 
 const InputText = (props) => {
@@ -18,6 +19,7 @@ const InputText = (props) => {
             >
                 {props.label}
             </label>
+            {/* showing error message if there are any */}
             {props.errorMsg === '' ? (
                 <div></div>
             ) : (
