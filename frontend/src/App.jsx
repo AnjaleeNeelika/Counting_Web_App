@@ -63,7 +63,7 @@ const App = () => {
                     <Route path='/video-input-type/no-of-actions/:uploadID' element={<NumberOfActions />} />
                     <Route path='/video-input-type/no-of-actions/input-points/:uploadID/:numbers' element={<InputPoints />} />
                     <Route path='/video-input-type/angles/:uploadID/:numbers' element={<Angles />} />
-                    <Route path='/video-input-type/show-count' element={<ShowCount />} />
+                    <Route path='/video-input-type/show-count/:uploadID' element={<ShowCount />} />
                     <Route path='/video-input-type/downloaded-videos' element={<DownloadedVideos />} />
                 </Routes>
             </div>
