@@ -14,6 +14,7 @@ import DownloadedVideos from './pages/DownloadedVideos';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ResetPassword from './pages/ResetPassword';
+import Websocket from './pages/websocket';
 
 const App = () => {
     return (
@@ -34,8 +35,9 @@ const App = () => {
                     <Route path='/video-input-type/no-of-actions/:uploadID' element={<NumberOfActions />} />
                     <Route path='/video-input-type/no-of-actions/input-points/:uploadID/:numbers' element={<InputPoints />} />
                     <Route path='/video-input-type/angles/:uploadID/:numbers' element={<Angles />} />
-                    <Route path='/video-input-type/show-count' element={<ShowCount />} />
+                    <Route path='/video-input-type/show-count/:uploadID' element={<ShowCount />} />
                     <Route path='/video-input-type/downloaded-videos' element={<DownloadedVideos />} />
+                    <Route path='/websocket' element={<Websocket />} />
                 </Routes>
             </div>
         </div>

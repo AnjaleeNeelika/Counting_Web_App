@@ -114,13 +114,17 @@ def get_video_details(video_id):
                             # Calculate angles between the lines
                             angle1 = np.arctan2(y1 - mid1_y, x1 - mid1_x)
                             angle2 = np.arctan2(y2 - mid1_y, x2 - mid1_x)
+                            start_angle = min(angle1, angle2)
+                            end_angle = max(angle1, angle2)
                             angle_between_lines = np.abs(np.degrees(angle1 - angle2))
+                            if angle_between_lines > 180.00:
+                                angle_between_lines = 360 - angle_between_lines
+                                start_angle, end_angle = end_angle, start_angle
 
                             # Draw arc segment between lines
                             color_index = min(int(angle_between_lines / 60), len(COLORS) - 1)
-                            start_angle = min(angle1, angle2)
-                            end_angle = max(angle1, angle2)
                             draw_angle_arc(frame, (mid1_x, mid1_y), radius, start_angle, end_angle, COLORS[color_index])
+                            # draw_angle_arc(frame, (mid1_x, mid1_y), radius, angle2, angle1, COLORS[color_index])
 
                             # Display the angle text
                             angle_text = f"Angle: {angle_between_lines:.2f}"

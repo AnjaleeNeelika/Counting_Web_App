@@ -15,11 +15,13 @@ const Angles = () => {
     const [numberOfSteps, setNumberOfSteps] = useState('');
     const [no_of_actions, setNoOfActions] = useState(null);
     const [formData, setFormData] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchVideoDetails = async () => {
+            setLoading(true);
             try {
                 const currentURL = window.location.href;
                 const cparts = currentURL.split('/');
@@ -39,6 +41,9 @@ const Angles = () => {
             } catch (error) {
                 setError(error.message);
                 console.error('Error loading video:', error);
+            } finally {
+                setLoading(false);
+                console.log("Loading state set to false");
             }
         };
 
@@ -69,7 +74,8 @@ const Angles = () => {
                 angles: formData
             });
             alert("Angles saved successfully");
-            navigate(`/video-input-type/show-count`)
+            navigate(`/video-input-type/show-count/${videoId}`)
+            // navigate(`/websocket`)
         } catch (error) {
             console.error("Error posting angles values", error)
         }
@@ -82,6 +88,7 @@ const Angles = () => {
         <div className='w-full h-full overflow-auto p-6 md:p-10 flex flex-wrap justify-center items-center gap-10'>
             <div className='bg-slate-300 w-full lg:w-[50vw] h-fit max-h-[60vh]'>
                 {/* <video src='/assets/videos/downloaded-video-5.mp4' controls autoPlay className='w-full'></video> */}
+                {loading && <p className='text-center text-[#8a5374] mt-4'>Encoding video, please wait..</p>}
                 {fileName && (
                     <video className="w-full" autoPlay loop controls muted>
                         <source src={`/videos/get_angles_videos/${fileName}`} type="video/mp4" />
