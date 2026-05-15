@@ -25,6 +25,7 @@ def get_video_details(video_id):
     if videos is None:
         return jsonify({'error': 'Videos collection not found'}), 500
     try:
+        print("ggggggggggggg")
         video_object_id = ObjectId(video_id)
 
         video_document = videos.find_one({'_id': video_object_id})
