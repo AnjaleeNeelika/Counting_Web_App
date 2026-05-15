@@ -1,4 +1,12 @@
-# .gitignore
+# Python specific
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
 venv/
-.env
+env/
+ENV/
+
+# Environment files
 **/.env
+**/.env.local
