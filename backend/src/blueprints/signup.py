@@ -10,6 +10,8 @@ bcrypt = Bcrypt()
 @signup_bp.route('/signup', methods=['POST'])
 def user_signup():
     from app import mongo
+    if mongo.db is None:
+        return jsonify({'error': 'Database connection not initialized. Check your MONGO_URI.'}), 500
     users = mongo.db.users
     data = request.json
     name = data.get('name')
